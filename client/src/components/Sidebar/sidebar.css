@@ -1,0 +1,16 @@
+.sidebar::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+.sidebar::-webkit-scrollbar-track {
+  -webkit-border-radius: 10px;
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+/* Handle */
+.sidebar::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgb(155, 152, 152);
+}

@@ -1,0 +1,18 @@
+.dashboard-heading-tr th {
+  height: 40px;
+  padding: 10px 2vh;
+  text-align: center;
+  box-shadow: inset 0px 1px 0px #b9b9b9;
+  background: #143894;
+}
+
+.dashboard-body-tr td {
+  height: 56px;
+  text-align: center;
+  padding: 10px 2vh;
+  box-shadow: inset 0px 1px 0px #b9b9b9;
+}
+
+.dashboard-body-tr:nth-child(even) {
+  background: #f6f4f4;
+}
