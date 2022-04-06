@@ -91,7 +91,12 @@ router.delete("/:id", async (req, res) => {
   if (mongoose.Types.ObjectId.isValid(req.params.id)) {
     try {
       const deletedUser = await User.findByIdAndRemove(req.params.id);
-
+      if (deletedUser.profilePic?.length) {
+        cloudinary.uploader.destroy(
+          deletedUser.profilePic[0].picId,
+          (error, result) => [error && res.status(500).json(error)]
+        );
+      }
       res.status(200).json(`User ${deletedUser.nama} Berhasil Dihapus`);
     } catch (error) {
       res.status(500).json({ message: error.message });

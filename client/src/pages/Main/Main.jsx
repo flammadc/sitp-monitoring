@@ -16,6 +16,7 @@ import Upload from "../Upload/Upload";
 import DetailLaporan from "../Detail Laporan/DetailLaporan";
 import EditLaporan from "../Edit Laporan/EditLaporan";
 import RequireAdmin from "../../utils/RequireAdmin";
+import DetailPegawai from "../../components/Detail Pegawai/DetailPegawai";
 
 const Main = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -49,6 +50,10 @@ const Main = () => {
           )}
           <Route element={<RequireAdmin />}>
             <Route path={"/pegawai"} element={<Pegawai />}></Route>
+            <Route
+              path={"/pegawai/detail/:id"}
+              element={<DetailPegawai />}
+            ></Route>
           </Route>
 
           <Route path={"/profile"} element={<Profile />}></Route>

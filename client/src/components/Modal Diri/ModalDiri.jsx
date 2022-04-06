@@ -9,21 +9,19 @@ const ModalDiri = ({
   setLoading,
   dataDiri,
   setDataDiri,
+  id,
 }) => {
   const user = useSelector((state) => state.user.currentUser);
 
   const handleEditDiri = async () => {
     setLoading(true);
     try {
-      await userRequest.put("/users/" + user._id, {
-        nama: dataDiri.nama,
-        nip: dataDiri.nip,
-        noTelp: dataDiri.noTelp,
-      });
-      setModal(false);
+      await userRequest.put("users/" + (id ? id : user._id), dataDiri);
+      setModal({ dataDiri: false });
 
       setLoading(false);
     } catch (error) {
+      setModal({ dataDiri: false });
       console.log(error);
       setLoading(false);
     }
@@ -39,11 +37,9 @@ const ModalDiri = ({
           <ul className="popup-list-template">
             <li>Nama</li>
             <li>No Telp</li>
-            <li>NIP</li>
           </ul>
 
           <ul className="popup-list-mid">
-            <li>:</li>
             <li>:</li>
             <li>:</li>
           </ul>
@@ -64,15 +60,6 @@ const ModalDiri = ({
                 value={dataDiri.noTelp}
                 onChange={(e) =>
                   setDataDiri({ ...dataDiri, noTelp: e.target.value })
-                }
-              />
-            </li>
-            <li>
-              <input
-                type="text"
-                value={dataDiri.nip}
-                onChange={(e) =>
-                  setDataDiri({ ...dataDiri, nip: e.target.value })
                 }
               />
             </li>

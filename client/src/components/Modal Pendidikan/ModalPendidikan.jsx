@@ -11,13 +11,14 @@ const ModalPendidikan = ({
   tambahPendidikan,
   setTambahPendidikan,
   profile,
+  id,
 }) => {
   const user = useSelector((state) => state.user.currentUser);
 
   const handleTambahPendidikan = async () => {
     setLoading(true);
     try {
-      await userRequest.put("users/" + user._id, {
+      await userRequest.put("users/" + (id ? id : user._id), {
         pendidikanTerakhir: [
           ...profile.pendidikanTerakhir,
 

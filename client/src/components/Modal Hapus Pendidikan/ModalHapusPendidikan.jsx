@@ -9,6 +9,7 @@ const ModalHapusPendidikan = ({
   profile,
   setLoading,
   loading,
+  id,
 }) => {
   const user = useSelector((state) => state.user.currentUser);
 
@@ -18,7 +19,7 @@ const ModalHapusPendidikan = ({
       const filteredPendidikan = profile.pendidikanTerakhir.filter(
         (p, i) => i !== index
       );
-      await userRequest.put("users/" + user._id, {
+      await userRequest.put("users/" + (id ? id : user._id), {
         pendidikanTerakhir: filteredPendidikan,
       });
       setModal({ hapus: false });

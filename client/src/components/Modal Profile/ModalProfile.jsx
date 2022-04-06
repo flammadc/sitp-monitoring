@@ -15,6 +15,7 @@ const ModalProfile = ({
   profilePic,
   setProfilePic,
   profile,
+  id,
 }) => {
   const user = useSelector((state) => state.user.currentUser);
   const handleEditProfilePic = async () => {
@@ -25,7 +26,7 @@ const ModalProfile = ({
     data.append("userId", profile._id);
     try {
       const res = await userRequest.post("users/upload", data);
-      await userRequest.put("users/" + user._id, {
+      await userRequest.put("users/" + (id ? id : user._id), {
         profilePic: [{ picId: res.data.picId, url: res.data.url }],
       });
       setLoading(false);

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from "../../components/Sidebar/Sidebar";
-import Topbar from "../../components/Topbar/Topbar";
+import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import { userRequest } from "../../requestMethods";
 import { CgProfile } from "react-icons/cg";
 import { MdEdit } from "react-icons/md";
@@ -10,9 +9,17 @@ import { BsChevronRight } from "react-icons/bs";
 
 import "./pegawai.css";
 import { useSelector } from "react-redux";
+import AddPegawai from "../../components/Modal Pegawai/AddPegawai";
+import EditPegawai from "../../components/Modal Pegawai/EditPegawai";
+import { Link } from "react-router-dom";
 
 const Pegawai = () => {
   const user = useSelector((state) => state.user.currentUser);
+  const [modal, setModal] = useState({
+    tambah: false,
+    ubah: { show: false, id: undefined },
+  });
+  const [hapus, setHapus] = useState(false);
   const [keyword, setKeyword] = useState();
   const [allPegawai, setAllPegawai] = useState();
 
@@ -27,7 +34,7 @@ const Pegawai = () => {
       }
     };
     getAllPegawai();
-  }, [user._id]);
+  }, [user._id, modal, hapus]);
 
   const handlePegawaiSearch = (e) => {
     e.preventDefault();
@@ -49,6 +56,25 @@ const Pegawai = () => {
     getAllPegawai();
   };
 
+  const handleHapusPegawai = async (pegawai) => {
+    setHapus(true);
+    try {
+      await userRequest.delete("users/" + pegawai._id);
+      setHapus(false);
+    } catch (error) {
+      console.log(error.response.data.message);
+      setHapus(false);
+    }
+  };
+
+  useEffect(() => {
+    if (modal.tambah || modal.ubah) {
+      disableBodyScroll(document);
+    } else {
+      enableBodyScroll(document);
+    }
+  }, [modal]);
+
   return (
     <div className="grid grid-cols-12 font-Lato col-span-12 pt-5">
       <div className="col-span-12 grid grid-cols-12 pr-8 ml-10">
@@ -58,7 +84,10 @@ const Pegawai = () => {
               Data Pegawai
             </h1>
             <div className="ml-auto grid grid-cols-12 items-center">
-              <div className="col-span-1 w-7 h-7 rounded-full bg-main-blue hover:bg-blue-500 cursor-pointer flex items-center justify-center text-white">
+              <div
+                className="col-span-1 w-7 h-7 rounded-full bg-main-blue hover:bg-blue-500 cursor-pointer flex items-center justify-center text-white"
+                onClick={() => setModal({ tambah: true })}
+              >
                 <AiOutlineUserAdd className="text-lg" />
               </div>
 
@@ -82,9 +111,12 @@ const Pegawai = () => {
             <table className="table-pegawai col-span-12 items-center font-Lato border-separate">
               <tbody className="">
                 {allPegawai?.length ? (
-                  allPegawai.map((p) => {
+                  allPegawai.map((p, i) => {
                     return (
-                      <tr className="pegawai-tr bg-white  shadow-lg col-span-12 ">
+                      <tr
+                        className="pegawai-tr bg-white  shadow-lg col-span-12"
+                        key={i}
+                      >
                         <td>
                           {p.profilePic?.length ? (
                             <img
@@ -101,12 +133,22 @@ const Pegawai = () => {
                         <td>{p.isAdmin ? "Admin" : "User"}</td>
                         <td>
                           <div className="flex flex-row items-center gap-5">
-                            <MdEdit className="text-struktur cursor-pointer hover:text-black" />
-                            <RiDeleteBin6Line className="text-red-500 cursor-pointer hover:text-red-700" />
+                            <MdEdit
+                              className="text-struktur cursor-pointer hover:text-black"
+                              onClick={() => {
+                                setModal({ ubah: { show: true, id: p._id } });
+                              }}
+                            />
+                            <RiDeleteBin6Line
+                              className="text-red-500 cursor-pointer hover:text-red-700"
+                              onClick={() => handleHapusPegawai(p)}
+                            />
                           </div>
                         </td>
                         <td>
-                          <BsChevronRight className="text-main-blue cursor-pointer hover:text-blue-500" />
+                          <Link to={"/pegawai/detail/" + p._id}>
+                            <BsChevronRight className="text-main-blue cursor-pointer hover:text-blue-500" />
+                          </Link>
                         </td>
                       </tr>
                     );
@@ -121,6 +163,10 @@ const Pegawai = () => {
           </div>
         </div>
       </div>
+      {modal.tambah && <AddPegawai setModal={setModal} />}
+      {modal.ubah?.show && (
+        <EditPegawai setModal={setModal} id={modal.ubah.id} />
+      )}
     </div>
   );
 };

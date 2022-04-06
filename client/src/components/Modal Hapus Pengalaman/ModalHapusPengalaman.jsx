@@ -9,6 +9,7 @@ const ModalHapusPengalaman = ({
   profile,
   setLoading,
   loading,
+  id,
 }) => {
   const user = useSelector((state) => state.user.currentUser);
 
@@ -18,7 +19,7 @@ const ModalHapusPengalaman = ({
       const filteredPengalaman = profile.pengalaman.filter(
         (p, i) => i !== index
       );
-      await userRequest.put("users/" + user._id, {
+      await userRequest.put("users/" + (id ? id : user._id), {
         pengalaman: filteredPengalaman,
       });
       setModal({ hapus: false });

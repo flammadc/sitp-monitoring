@@ -4,9 +4,19 @@ const User = require("../models/User.js");
 const jwt = require("jsonwebtoken");
 
 router.post("/register", async (req, res) => {
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(req.body.password, salt);
   try {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    const findByNip = await User.findOne({ nip: req.body.nip });
+    const findByEmail = await User.findOne({ email: req.body.email });
+    if (findByNip) {
+      res.status(409).json({ message: "NIP Sudah Terdaftar" });
+      return;
+    }
+    if (findByEmail) {
+      res.status(409).json({ message: "Email Sudah Terdaftar" });
+      return;
+    }
     const newUser = new User({ ...req.body, password: hashedPassword });
     const user = await newUser.save();
     const { password, ...others } = user._doc;
