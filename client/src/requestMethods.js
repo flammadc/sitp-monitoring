@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000/api";
+const BASE_URL = "https://sitp-monitoring.herokuapp.com/api";
 
 export const userRequest = axios.create({
   baseURL: BASE_URL,
