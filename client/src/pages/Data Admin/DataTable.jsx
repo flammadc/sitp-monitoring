@@ -20,16 +20,26 @@ const DataTable = ({ a }) => {
   return (
     <tr className="dashboard-body-tr">
       <td className="flex flex-row items-center">
-        {user?.profilePic.length ? (
-          <img
-            src={user?.profilePic[0].url}
-            className="w-8 mr-5 object-cover h-8 rounded-full"
-            onLoad={() => imageLoader()}
-          />
+        {user ? (
+          user?.profilePic.length ? (
+            <>
+              <img
+                src={user?.profilePic[0].url}
+                className="w-8 mr-5 object-cover h-8 rounded-full"
+              />
+              {user?.nama}
+            </>
+          ) : (
+            <CgProfile className="w-8 h-8 mr-5" />
+          )
         ) : (
-          <CgProfile className="w-8 h-8 mr-5" />
+          <Loader
+            type="spinner-default"
+            bgColor={"#333333"}
+            color={"#333333"}
+            size={40}
+          />
         )}
-        {user?.nama}
       </td>
       <td className="">{a.judul}</td>
       <td>{moment(a.selesai).format("D MMM YYYY")}</td>
@@ -43,17 +53,6 @@ const DataTable = ({ a }) => {
         </Link>
       </td>
     </tr>
-  );
-};
-
-const imageLoader = () => {
-  return (
-    <Loader
-      type="spinner-default"
-      bgColor={"#0D8BFF"}
-      color={"#0D8BFF"}
-      size={70}
-    />
   );
 };
 
