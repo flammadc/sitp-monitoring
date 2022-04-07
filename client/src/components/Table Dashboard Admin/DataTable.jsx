@@ -19,7 +19,7 @@ const DataTable = ({ a }) => {
   });
 
   return (
-    <tr className="dashboard-body-tr">
+    <tr className="dashboard-body-tr text-center">
       <td className="flex flex-row items-center">
         {user?.profilePic.length ? (
           <img

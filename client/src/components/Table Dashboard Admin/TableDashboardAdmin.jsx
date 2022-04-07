@@ -23,8 +23,8 @@ const TableDashboardAdmin = ({ activities }) => {
           activities.map((a, i) => {
             if (i === 5) {
               return (
-                <tr className="dashboard-body-tr ">
-                  <td colSpan={5} className="">
+                <tr className="dashboard-body-tr text-center">
+                  <td colSpan={5} className="text-left sm:text-center">
                     <Link to="/data" className="text-main-blue text-lg">
                       Lihat Selengkapnya ....
                     </Link>

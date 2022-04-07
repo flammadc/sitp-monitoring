@@ -78,13 +78,18 @@ const Dashboard = () => {
     }
   }, [activities]);
 
+  console.log(window.innerWidth);
+
   return (
     <div className="bg-white-sec min-h-screen">
       <div className="grid grid-cols-12 bg-white-sec pt-5  pr-6">
-        <div className="col-span-6">
-          <BoxBulan bulan={bulan ? bulan : 0} className="col-span-6" />
+        <div className="col-span-12 sm:col-span-6 mb-5">
+          <BoxBulan
+            bulan={bulan ? bulan : 0}
+            className="col-span-12 sm:col-span-6 mb-5"
+          />
         </div>
-        <div className="col-span-6">
+        <div className="col-span-12 sm:col-span-6 mb-5">
           <BoxTahun tahun={tahun ? tahun : 0} className="col-span-6" />
         </div>
 
@@ -97,7 +102,6 @@ const Dashboard = () => {
               <h2 className="text-lg text-gray-500">
                 Belum Ada Laporan,
                 <Link className="text-main-blue" to="/upload">
-                  {" "}
                   Upload Disini
                 </Link>
               </h2>
@@ -105,8 +109,8 @@ const Dashboard = () => {
           )}
         </div>
         <div className="col-span-12 grid grid-cols-12 bg-white ml-10 p-6 border border-main-color mt-5 shadow-md">
-          <div className="col-span-12 flex flex-row mb-6">
-            <h2 className="font-Mulish text-xl font-bold">
+          <div className="col-span-12 flex flex-row mb-6 ">
+            <h2 className="font-Mulish text-xl font-bold ">
               Laporan Kegiatan Terakhir
             </h2>
           </div>

@@ -29,7 +29,7 @@ const Topbar = ({ setSidebar, sidebar, width }) => {
           sidebar
             ? width >= 1024
               ? "text-2xl cursor-pointer"
-              : "text-2xl cursor-pointer ml-48"
+              : "text-2xl cursor-pointer ml-40"
             : "text-2xl cursor-pointer"
         }
         onClick={() => setSidebar(!sidebar)}
@@ -37,14 +37,16 @@ const Topbar = ({ setSidebar, sidebar, width }) => {
       {profile && (
         <div className="nav-profile-container flex ml-auto items-center w-56 h-10 ">
           {profile.profilePic.length ? (
-            <img
-              src={profile.profilePic[0].url}
-              className="rounded-full w-10 h-10 object-cover "
-            />
+            <Link to="/profile" className="ml-auto sm:ml-0">
+              <img
+                src={profile.profilePic[0].url}
+                className="rounded-full w-10 h-10 object-cover "
+              />
+            </Link>
           ) : (
             <CgProfile className="text-4xl" />
           )}
-          <div className="ml-4 text-justify">
+          <div className="ml-4 text-justify hidden sm:block">
             <Link
               className="font-medium text-base text-main-blue hover:text-blue-500"
               to="/profile"

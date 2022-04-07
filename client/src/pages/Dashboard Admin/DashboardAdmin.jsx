@@ -80,33 +80,20 @@ const DashboardAdmin = () => {
   return (
     <div className="bg-white-sec min-h-screen">
       <div className="grid grid-cols-12 bg-white-sec pt-5 pr-6">
-        <div className="col-span-6">
+        <div className="col-span-12 sm:col-span-6 mb-5">
           <BoxBulan bulan={bulan ? bulan : 0} />
         </div>
-        <div className="col-span-6">
+        <div className="col-span-12 sm:col-span-6 mb-5">
           <BoxTahun tahun={tahun ? tahun : 0} />
         </div>
-        <div className="col-span-12 pt-3 ml-10">
+        <div className="col-span-12 pt-3 sm:ml-10 ml-6">
           {activitiesStat && <Chart data={activitiesStat} />}
         </div>
-        <div className="col-span-12 grid grid-cols-12 bg-white ml-10 p-6 border border-main-color mt-5 shadow-md">
+        <div className="col-span-12 grid grid-cols-12 bg-white sm:ml-10 ml-6 p-6 border border-main-color mt-5 shadow-md">
           <div className="col-span-12 flex flex-row mb-4">
             <h2 className="font-Mulish text-xl font-bold">
               Laporan Kegiatan Terakhir
             </h2>
-
-            <div className="ml-auto flex flex-row items-center">
-              <Link to="/upload">
-                <VscNewFile className="text-2xl text-thead-color mr-2" />
-              </Link>
-              <Link to="/data">
-                <div className="px-5 py-2 rounded-md  flex items-center justify-center bg-thead-color">
-                  <p className="text-white font-Mulish font-bold">
-                    Selengkapnya...
-                  </p>
-                </div>
-              </Link>
-            </div>
           </div>
           <div className="col-span-12 grid grid-cols-12 overflow-x-auto">
             <TableDashboardAdmin activities={activities} />

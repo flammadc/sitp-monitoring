@@ -47,11 +47,13 @@ const Data = () => {
   };
 
   return (
-    <div className="container-content grid grid-cols-12 pr-10 pt-10">
-      <div className="col-span-12 shadow-md ml-16  pr-5 pl-6 pb-8 pt-7 bg-white rounded-lg">
-        <div className="col-span-12 flex flex-row mb-7 items-center">
-          <h1 className="header-semua-box">Daftar Laporan Kegiatan</h1>
-          <div className="ml-auto">
+    <div className="grid grid-cols-12 sm:pr-10 sm:pt-10 pr-5 pt-5">
+      <div className="col-span-12 shadow-md ml-8 sm:ml-16  pr-5 pl-6 pb-8 pt-7 bg-white rounded-lg">
+        <div className="col-span-12 grid grid-cols-12  sm:mb-7  mb-3">
+          <h1 className="header-semua-box sm:text-left text-center sm:col-span-7 col-span-12 mb-3 sm:mb-0">
+            Daftar Laporan Kegiatan
+          </h1>
+          <div className="sm:col-span-5 col-span-12 sm:mx-0 mx-auto sm:ml-auto ml-0 flex justify-center items-center">
             <form
               className="semua-search-input relative  flex flex-row items-center ml-auto  text-[#9A9AB0]"
               onSubmit={(e) => {
@@ -60,7 +62,7 @@ const Data = () => {
               }}
             >
               <input
-                className="input-searchbar focus:text-[#333333] ml-3 border shadow-md"
+                className="input-searchbar focus:text-[#333333]  border shadow-md sm:ml-auto ml-0"
                 type="text"
                 id="search"
                 placeholder="Search here..."
