@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Loader from "react-js-loader";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import { userRequest } from "../../requestMethods";
 import { CgProfile } from "react-icons/cg";
@@ -15,22 +16,26 @@ import { Link } from "react-router-dom";
 
 const Pegawai = () => {
   const user = useSelector((state) => state.user.currentUser);
+  const [loading, setLoading] = useState();
   const [modal, setModal] = useState({
     tambah: false,
     ubah: { show: false, id: undefined },
   });
   const [hapus, setHapus] = useState(false);
-  const [keyword, setKeyword] = useState();
+  const [keyword, setKeyword] = useState("");
   const [allPegawai, setAllPegawai] = useState();
 
   useEffect(() => {
+    setLoading(true);
     const getAllPegawai = async () => {
       try {
         const res = await userRequest.get("/users");
         const filteredPegawai = res.data.filter((d) => d._id !== user._id);
         setAllPegawai(filteredPegawai);
+        setLoading(false);
       } catch (error) {
         console.log(error);
+        setLoading(false);
       }
     };
     getAllPegawai();
@@ -38,6 +43,7 @@ const Pegawai = () => {
 
   const handlePegawaiSearch = (e) => {
     e.preventDefault();
+    setLoading(true);
     const getAllPegawai = async () => {
       let res;
       try {
@@ -45,12 +51,16 @@ const Pegawai = () => {
           res = await userRequest.get("/users");
           const filteredPegawai = res.data.filter((d) => d._id !== user._id);
           setAllPegawai(filteredPegawai);
+          setLoading(false);
           return;
         }
         res = await userRequest.get("users/search/" + keyword);
-        setAllPegawai(res.data);
+        const filteredPegawai = res.data.filter((d) => d._id !== user._id);
+        setAllPegawai(filteredPegawai);
+        setLoading(false);
       } catch (error) {
         console.log(error);
+        setLoading(false);
       }
     };
     getAllPegawai();
@@ -68,7 +78,7 @@ const Pegawai = () => {
   };
 
   useEffect(() => {
-    if (modal.tambah || modal.ubah) {
+    if (modal.tambah || modal.ubah.show) {
       disableBodyScroll(document);
     } else {
       enableBodyScroll(document);
@@ -110,7 +120,14 @@ const Pegawai = () => {
           <div className="col-span-12 grid grid-cols-12 overflow-x-auto">
             <table className="table-pegawai col-span-12 items-center font-Lato border-separate">
               <tbody className="">
-                {allPegawai?.length ? (
+                {loading ? (
+                  <Loader
+                    type="spinner-default"
+                    bgColor={"#0D8BFF"}
+                    color={"#0D8BFF"}
+                    size={70}
+                  />
+                ) : allPegawai?.length ? (
                   allPegawai.map((p, i) => {
                     return (
                       <tr
