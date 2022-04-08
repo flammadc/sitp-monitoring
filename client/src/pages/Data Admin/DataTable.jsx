@@ -25,9 +25,9 @@ const DataTable = ({ a }) => {
             <>
               <img
                 src={user?.profilePic[0].url}
-                className="w-8 mr-5 object-cover h-8 rounded-full"
+                className="min-w-[32px] h-8 object-cover rounded-full"
               />
-              {user?.nama}
+              <div className="ml-3">{user?.nama}</div>
             </>
           ) : (
             <CgProfile className="w-8 h-8 mr-5" />
@@ -35,8 +35,8 @@ const DataTable = ({ a }) => {
         ) : (
           <Loader
             type="spinner-default"
-            bgColor={"#333333"}
-            color={"#333333"}
+            bgColor={"#0D8BFF"}
+            color={"#0D8BFF"}
             size={40}
           />
         )}
