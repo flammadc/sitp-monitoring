@@ -1,5 +1,23 @@
 .upload-box {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr) );
+  padding-right: 40px;
   margin-left: 45px;
+}
+
+.content-upload-box {
+  grid-column: span 12 / span 12;
+  display: flex;
+  flex-direction: column;
+  /* gap: 24px; */
+
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  margin-top: 16px;
+  padding-top: 40px;
+  padding-left: 40px;
+  background: #ffffff;
+  border-radius: 5px;
 }
 
 .header-upload-box {
@@ -8,25 +26,11 @@
   font-weight: 800;
   font-size: 24px;
   line-height: 30px;
+  margin-bottom: 40px;
 
   /* table-font */
 
   color: #000000;
-}
-
-.content-upload-box {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-
-  width: 966px;
-  margin-bottom: 30px;
-  padding-bottom: 20px;
-  margin-top: 16px;
-  padding-top: 40px;
-  padding-left: 40px;
-  background: #ffffff;
-  border-radius: 5px;
 }
 
 .list-content {
@@ -40,6 +44,7 @@
   line-height: 27px;
   display: flex;
   gap: 12px;
+  margin-bottom: 24px;
 
   /* font/sec-font */
 
@@ -51,8 +56,9 @@
 }
 
 .input-text {
-  width: 886px;
+  grid-column: span 12 / span 12;
   height: 52px;
+  margin-right: 40px;
   left: 40px;
   top: 72px;
   padding-left: 10px;
@@ -97,9 +103,10 @@
 }
 
 .section-file {
-  width: 886px;
+  grid-column: span 12 / span 12;
   height: 56px;
-  margin-top: 12px;
+  /* margin-top: 12px; */
+  margin-right: 40px;
   /* bg */
 
   /* border */
@@ -107,7 +114,10 @@
   border: 0.5px solid #dcdbdb;
   box-sizing: border-box;
   border-radius: 4px;
-
+  overflow-x: hidden;
+  overflow-y: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -143,9 +153,9 @@
   justify-content: center;
   margin: auto;
   /* biru/2 */
-
   border-radius: 6px;
   border: none;
+  margin-top: 32px;
 }
 
 .upload-anchor {
@@ -238,3 +248,41 @@
 }
 
 /* popup */
+
+
+@media(max-width:500px){
+
+  .header-upload-box{
+    text-align: center;
+    font-size: 24px;
+    margin-right: 40px;
+  }
+
+  .list-content{
+    margin-bottom: 32px;
+  }
+
+  .list-content, .header-file, .section-file{
+    font-size: 14px;
+  }
+
+  .label-text{
+    margin-left: 0;
+  }
+
+  .upload-button{
+    width: 112px;
+height: 36px;
+
+/* biru/2 */
+background: #0D8BFF;
+border-radius: 10px;
+margin-top: 40px;
+  }
+
+  .upload-anchor{
+    font-weight: 600;
+font-size: 12px;
+line-height: 18px;
+  }
+}
