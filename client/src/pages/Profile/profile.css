@@ -1,5 +1,11 @@
+.container-content {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  padding-right: 40px;
+}
+
 .jumbo-box {
-  width: 1056px;
+  grid-column: span 12 / span 12;
   height: 340px;
 
   border-radius: 8px;
@@ -102,7 +108,7 @@
   font-size: 18px;
   line-height: 22px;
 
-  margin-top: 14.09px;
+  margin-top: 12.09px;
 
   /* identical to box height */
 
@@ -111,20 +117,23 @@
 }
 
 .detail-box-col-1 {
-  display: flex;
+  display: grid;
 
   font-family: "Lato";
   font-style: normal;
+  grid-column: span 12 / span 12;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
 }
 
-.akun-box {
-  width: 496px;
-  height: 290px;
+.akun-box,
+.diri-box {
+  grid-column: span 6 / span 6;
+  min-height: 290px;
 
   background: #ffffff;
-  border-radius: 2px;
+  border-radius: 8px;
   margin-top: 40px;
-  margin-left: 40px;
+  margin-left: 30px;
   padding-top: 24px;
   /* padding-left: 48px; */
   box-sizing: border-box;
@@ -195,26 +204,6 @@
   cursor: pointer;
 }
 
-.diri-box {
-  width: 496px;
-  height: 290px;
-
-  background: #ffffff;
-  border-radius: 2px;
-  margin-top: 40px;
-  margin-left: 30px;
-  padding-top: 24px;
-  /* padding-left: 15px; */
-  box-sizing: border-box;
-
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-
-  font-family: "Lato";
-  font-style: normal;
-}
-
 .diri-header {
   font-weight: 900;
   font-size: 20px;
@@ -241,15 +230,16 @@
 .detail-box-col-2 {
   margin-top: 40px;
 
-  display: flex;
-  gap: 40px;
-  flex-direction: row;
+  display: grid;
+
+  grid-column: span 12 / span 12;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
 }
 
 .pengalaman-box,
 .pendidikan-box {
-  width: 496px;
-  height: 340px;
+  grid-column: span 6 / span 6;
+  min-height: 340px;
   box-sizing: border-box;
 
   padding-top: 24px;
@@ -259,7 +249,6 @@
 
   display: flex;
   flex-direction: column;
-  position: relative;
 }
 
 .header-pengalaman-box,
@@ -278,10 +267,15 @@
 .hr {
   display: flex;
   justify-content: center;
-  width: 364px;
+  /* width: 364px; */
   height: 0px;
   margin-top: 12px;
   margin-left: 66px;
+  margin-right: 66px;
+
+  /* position: absolute;
+  left: 0;
+  right: 0; */
 
   /* font/sec-font */
   border-bottom: 4px solid #404557;
@@ -316,7 +310,7 @@
 }
 
 .bold {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 16px;
   line-height: 24px;
 
@@ -347,7 +341,7 @@
 }
 
 .pendidikan-list-tempat {
-  margin-left: 40px;
+  margin-left: 35px;
   margin-top: 4px;
 }
 
@@ -849,3 +843,86 @@
 }
 
 /* popup */
+
+@media (max-width: 830px) {
+  .jumbo-box,
+  .diri-box,
+  .akun-box,
+  .pendidikan-box,
+  .pengalaman-box {
+    grid-column: span 12 / span 12;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+  }
+
+  .diri-box,
+  .akun-box,
+  .pendidikan-box {
+    margin-top: 20px;
+  }
+
+  .pengalaman-box {
+    margin-top: -20px;
+  }
+
+  .hr {
+    margin-right: 40px;
+    margin-left: 40px;
+  }
+}
+
+@media (max-width: 500px) {
+  .jumbo-nama-h1 {
+    font-size: 24px;
+  }
+
+  .jumbo-pic:hover .hover-pic {
+    width: 140px;
+    height: 140px;
+  }
+
+  .jumbo-pic {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .jumbo-pic img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .jumbo-jabatan {
+    font-size: 12px;
+    margin-top: 8px;
+  }
+
+  .diri-header,
+  .akun-header,
+  .header-pengalaman-box,
+  .header-pendidikan-box {
+    font-size: 16px;
+  }
+
+  .akun-section,
+  .diri-section {
+    gap: 15px;
+    margin: 28px auto;
+  }
+
+  .diri-section,
+  .akun-section,
+  .list-pengalaman li,
+  .bold,
+  .list-tempat {
+    font-size: 12px;
+  }
+
+  .btn-detail {
+    width: 116px;
+    height: 36px;
+  }
+
+  .list-pengalaman {
+    margin-left: 40px;
+  }
+}

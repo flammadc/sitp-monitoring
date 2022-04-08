@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
-import Loader from "react-js-loader";
 import { userRequest } from "../../requestMethods";
 import { CgProfile } from "react-icons/cg";
 
@@ -135,7 +134,7 @@ const Profile = () => {
             <div className="diri-box shadow-md">
               <h2 className="diri-header">Data Diri</h2>
               <div className="diri-section">
-                <ul className="diri-detail-template list-style-none">
+                <ul className="diri-detail-template bold list-style-none">
                   <li>Nama</li>
                   <li>No Telp</li>
                   <li>NIP</li>
@@ -162,7 +161,7 @@ const Profile = () => {
                 </ul>
               </div>
               <button
-                className="detail-btn btn-diri btn-detail mt-10"
+                className="detail-btn btn-diri button-anchor btn-detail mb-8"
                 onClick={() => setModal({ ...modal, dataDiri: true })}
               >
                 Ubah Data
@@ -172,7 +171,7 @@ const Profile = () => {
             <div className="akun-box shadow-md">
               <h2 className="akun-header ">Data Akun</h2>
               <div className="akun-section">
-                <ul className="akun-section-template list-style-none">
+                <ul className="akun-section-template bold list-style-none">
                   <li>Email</li>
                   <li>Password</li>
                 </ul>
@@ -189,7 +188,7 @@ const Profile = () => {
               </div>
 
               <button
-                className="btn-detail detail-btn btn-akun"
+                className="btn-anchor btn-detail  detail-btn btn-akun mb-8"
                 onClick={() => setModal({ ...modal, dataAkun: true })}
               >
                 Ubah Akun
@@ -259,7 +258,7 @@ const Profile = () => {
                           <div className="slash">/</div>
                           <div className="tahun">{p.tahun}</div>
                           <IoIosClose
-                            className="cursor-pointer text-2xl text-red-500 ml-auto mr-3"
+                            className="cursor-pointer text-2xl text-red-500 ml-auto mr-5"
                             onClick={() => {
                               setModal({ ...modal, hapusPendidikan: true });
                               setIndex(i);
@@ -275,7 +274,7 @@ const Profile = () => {
                   })}
                 </ul>
               ) : (
-                <div className="w-full h-full pb-5 flex items-center justify-center">
+                <div className="w-full h-full flex items-center justify-center pb-5">
                   <h1 className="font-Lato text-md text-gray-500">
                     Belum Ada Riwayat Pendidikan, Silahkan Tambah Pendidikan
                   </h1>
