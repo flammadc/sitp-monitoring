@@ -95,26 +95,26 @@ const Profile = () => {
     <div className="mb-2">
       <div className="relative  min-h-full h-max">
         <div className="container-content">
-          <div className="jumbo-box shadow-md">
+          <div className="jumbo-box shadow-md sm:pt-5 pt-12 px-12">
             {profile?.profilePic.length >= 1 ? (
-              <div className="relative w-52 h-52 jumbo-pic">
+              <div className="relative w-36 h-36 sm:w-52 sm:h-52 jumbo-pic">
                 <img
                   src={profile?.profilePic[0].url}
                   alt=""
-                  className="w-52 h-52 rounded-full object-cover"
+                  className=" w-36 h-36 sm:w-52 sm:h-52 rounded-full object-cover"
                 />
                 <span
-                  className="hover-pic absolute top-0 rounded-full w-52 h-52 bg-overlay-color hidden items-center justify-center"
+                  className="hover-pic absolute top-0 rounded-full  w-36 h-36 sm:w-52 sm:h-52 bg-overlay-color hidden items-center justify-center"
                   onClick={() => setModal({ ...modal, profilePic: true })}
                 >
                   <FiEdit2 className="text-6xl text-gray-500" />
                 </span>
               </div>
             ) : (
-              <div className="relative w-52 h-52 jumbo-pic">
-                <CgProfile className="w-52 h-52" />
+              <div className="relative w-36 h-36 sm:w-52 sm:h-52 jumbo-pic">
+                <CgProfile className="w-36 h-36 sm:w-52 sm:h-52" />
                 <span
-                  className="hover-pic absolute top-0 rounded-full w-52 h-52 bg-overlay-color hidden items-center justify-center"
+                  className="hover-pic absolute top-0 rounded-full w-36 h-36 sm:w-52 sm:h-52 bg-overlay-color hidden items-center justify-center"
                   onClick={() => setModal({ ...modal, profilePic: true })}
                 >
                   <FiEdit2 className="text-6xl text-gray-200" />

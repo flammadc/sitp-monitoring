@@ -11,7 +11,6 @@
   border-radius: 8px;
   margin-left: 30px;
   margin-top: 20px;
-  padding: 24px 10px;
 
   background: #fff;
 
@@ -873,10 +872,11 @@
 
 @media (max-width: 500px) {
   .jumbo-nama-h1 {
-    font-size: 24px;
+    font-size: 26px;
+    margin-top: 10px;
   }
 
-  .jumbo-pic:hover .hover-pic {
+  /* .jumbo-pic:hover .hover-pic {
     width: 140px;
     height: 140px;
   }
@@ -889,10 +889,10 @@
   .jumbo-pic img {
     width: 140px;
     height: 140px;
-  }
+  } */
 
   .jumbo-jabatan {
-    font-size: 12px;
+    font-size: 16px;
     margin-top: 8px;
   }
 
