@@ -20,9 +20,9 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-col w-screen h-screen items-center justify-center font-Poppins ">
+    <div className="grid items-center justify-center  w-screen h-screen  font-Poppins">
       <form
-        className="w-1/2 h-2/3 border border-main-color flex flex-col items-center pt-10 shadow-md"
+        className="sm:w-[640px] w-screen border border-main-color flex flex-col items-center pt-10 pb-10 shadow-md"
         onSubmit={handleSubmit}
       >
         <img src={SitpLogo} alt="Sitp Logo" className="w-24 h-12 mb-7" />
@@ -31,18 +31,18 @@ const Login = () => {
         <input
           type="email"
           placeholder="Email Adress"
-          className="w-1/2 h-12 border border-black outline-none mb-4 pl-3"
+          className="sm:w-1/2 w-[80vw] h-12 border border-black outline-none mb-4 pl-3"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
           placeholder="Password"
-          className="w-1/2 h-12 border border-black outline-none pl-3 mb-3"
+          className="sm:w-1/2 w-[80vw]  h-12 border border-black outline-none pl-3 mb-3"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <div className="w-1/2">
+        <div className="sm:w-1/2 w-[80vw]">
           <input
             type="checkbox"
             id="remember_me"
