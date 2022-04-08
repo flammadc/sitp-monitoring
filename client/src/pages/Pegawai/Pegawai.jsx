@@ -78,7 +78,7 @@ const Pegawai = () => {
   };
 
   useEffect(() => {
-    if (modal.tambah || modal.ubah.show) {
+    if (modal.tambah || modal.ubah?.show) {
       disableBodyScroll(document);
     } else {
       enableBodyScroll(document);
@@ -87,26 +87,26 @@ const Pegawai = () => {
 
   return (
     <div className="grid grid-cols-12 font-Lato col-span-12 pt-5">
-      <div className="col-span-12 grid grid-cols-12 pr-8 ml-10">
+      <div className="col-span-12 grid grid-cols-12 pr-3 ml-4">
         <div className="col-span-12 bg-white grid grid-cols-12 pl-10 pr-10 py-10 shadow-md whitespace-nowrap">
-          <div className="mb-10 flex flex-row col-span-12">
-            <h1 className="text-2xl font-medium font-Mulish col-span-8 ">
+          <div className="mb-5 sm:mb-10 flex flex-col sm:flex-row col-span-12">
+            <h1 className="text-2xl font-medium font-Mulish col-span-8 mb-5 sm:mb-0">
               Data Pegawai
             </h1>
-            <div className="ml-auto grid grid-cols-12 items-center">
+            <div className="sm:ml-auto grid grid-cols-12 items-center">
               <div
-                className="col-span-1 w-7 h-7 rounded-full bg-main-blue hover:bg-blue-500 cursor-pointer flex items-center justify-center text-white"
+                className="col-span-1 w-7 h-7 rounded-full bg-main-blue hover:bg-blue-500 cursor-pointer flex items-center justify-center text-white  "
                 onClick={() => setModal({ tambah: true })}
               >
-                <AiOutlineUserAdd className="text-lg" />
+                <AiOutlineUserAdd className="text-lg " />
               </div>
 
               <form
-                className="relative text-[#9A9AB0] col-span-11"
+                className="relative text-[#9A9AB0] col-span-11 sm:ml-0 ml-4"
                 onSubmit={handlePegawaiSearch}
               >
                 <input
-                  className=" focus:text-[#333333] bg-white-sec w-full ml-3 pl-10 h-9 rounded-md outline-none border shadow-md"
+                  className=" focus:text-[#333333] bg-white-sec w-44 sm:w-full ml-3 pl-10 pr-3 h-9 rounded-md outline-none border shadow-md"
                   type="text"
                   id="search"
                   placeholder="Search here..."
