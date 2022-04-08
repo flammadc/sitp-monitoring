@@ -22,7 +22,7 @@ module.exports = {
       height: {
         87: "87vh",
         120: "120px",
-        "chart-container": "40vh",
+        "chart-container": "50vh",
         "box-container": "10vh",
       },
 

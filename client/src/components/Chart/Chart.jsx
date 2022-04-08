@@ -13,8 +13,8 @@ import {
 
 const Chart = ({ data }) => {
   return (
-    <div className="bg-white pt-3 h-chart-container pr-5 pb-9 border border-main-color font-Poppins shadow-md">
-      <h2 className="text-lg mb-3 ml-12 font-medium">
+    <div className="bg-white pt-6 h-chart-container pr-5 pb-9 border border-main-color font-Poppins shadow-md">
+      <h2 className="text-lg mb-5 ml-12 font-medium">
         Laporan Kegiatan Tahun Ini
       </h2>
 
