@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import { logoutAttempt } from "../../redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useWindowSize } from "@react-hook/window-size";
 
 // ICON
 import LogoSitp from "../../assets/svg/logo.svg";
@@ -19,95 +20,107 @@ import "./sidebar.css";
 
 const Sidebar = ({ sidebar, setSidebar }) => {
   const user = useSelector((state) => state.user.currentUser);
+  const [width, height] = useWindowSize();
   const dispatch = useDispatch();
   const location = useLocation().pathname;
+
   return (
     <nav
-      className={`sidebar  lg:flex flex fixed z-30 top-0 left-0 bottom-0 flex-col overflow-y-auto border-r border-border-main-color px-10 py-7  text-font-sec bg-white  font-Poppins `}
+      className={`sidebar lg:flex flex fixed z-30 top-0 left-0 bottom-0 flex-col overflow-y-auto border-r border-border-main-color px-10 py-7  text-font-sec bg-white  font-Poppins `}
     >
       <img src={LogoSitp} className="mb-12" />
       <div className="mb-9">
         <div className="text-sm mb-2 text-gray-500">Home</div>
-        <div
+        <Link
+          to="/"
           className={
             location === "/"
               ? `flex  text-main-blue hover:text-main-blue cursor-pointer`
               : `flex  hover:text-main-blue cursor-pointer`
           }
+          onClick={() => width <= 1024 && setSidebar(false)}
         >
           <div className="text-xl mr-2">
             <MdDashboard />
           </div>
-          <Link to="/">
+          <div>
             <div className="text-sm ">Dashboard</div>
-          </Link>
-        </div>
+          </div>
+        </Link>
       </div>
 
       <div className="mb-9">
         <div className="text-sm mb-3 text-gray-500">Laporan</div>
-        <div
+        <Link
+          to="/data"
           className={
             location === "/data"
               ? `flex text-main-blue hover:text-main-blue cursor-pointer`
               : `flex hover:text-main-blue cursor-pointer`
           }
+          onClick={() => width <= 1024 && setSidebar(false)}
         >
           <div className="text-xl mr-2">
             <FaTasks />
           </div>
-          <Link to="/data">
+          <div>
             <div className="text-sm mb-3">Data</div>
-          </Link>
-        </div>
-        <div
+          </div>
+        </Link>
+        <Link
+          to="/upload"
           className={
             location === "/upload"
               ? `flex text-main-blue hover:text-main-blue cursor-pointer`
               : `flex hover:text-main-blue cursor-pointer`
           }
+          onClick={() => width <= 1024 && setSidebar(false)}
         >
           <div className="text-xl mr-2">
             <VscNewFile />
           </div>
-          <Link to="/upload">
+          <div>
             <div className="text-sm ">Upload</div>
-          </Link>
-        </div>
+          </div>
+        </Link>
       </div>
       <div className="mb-9">
         <div className="text-sm text-gray-500 mb-3">Account</div>
         {user?.isAdmin && (
-          <div
+          <Link
+            to="/pegawai"
             className={
               location === "/pegawai"
                 ? `flex text-main-blue hover:text-main-blue cursor-pointer`
                 : `flex hover:text-main-blue cursor-pointer`
             }
+            onClick={() => width <= 1024 && setSidebar(false)}
           >
             <div className="text-xl mr-2">
               <FaUsers />
             </div>
-            <Link to="/pegawai">
+            <div>
               <div className="text-sm mb-3">Pegawai</div>
-            </Link>
-          </div>
+            </div>
+          </Link>
         )}
 
-        <div
+        <Link
+          to="/profile"
           className={
             location === "/profile"
               ? `flex text-main-blue hover:text-main-blue cursor-pointer`
               : `flex hover:text-main-blue cursor-pointer`
           }
+          onClick={() => width <= 1024 && setSidebar(false)}
         >
           <div className="text-xl mr-2">
             <CgProfile />
           </div>
-          <Link to="/profile">
+          <div>
             <div className="text-sm mb-3">My Profile</div>
-          </Link>
-        </div>
+          </div>
+        </Link>
         <div className="flex order-last text-red-500 cursor-pointer hover:text-red-700">
           <div className="text-xl mr-2">
             <FiLogOut />
