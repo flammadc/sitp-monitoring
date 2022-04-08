@@ -108,7 +108,7 @@ const Dashboard = () => {
             </div>
           )}
         </div>
-        <div className="col-span-12 grid grid-cols-12 bg-white ml-10 p-6 border border-main-color mt-5 shadow-md">
+        <div className="col-span-12 grid grid-cols-12 bg-white sm:ml-10 ml-6 p-6 border border-main-color mt-5 shadow-md">
           <div className="col-span-12 flex flex-row mb-6 ">
             <h2 className="font-Mulish text-xl font-bold ">
               Laporan Kegiatan Terakhir

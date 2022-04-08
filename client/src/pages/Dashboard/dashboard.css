@@ -1,6 +1,6 @@
 .dashboard-heading-tr th {
   height: 40px;
-  padding: 10px 2vh;
+  padding: 10px 60px 10px 20px;
   text-align: center;
   box-shadow: inset 0px 1px 0px #b9b9b9;
   background: #143894;
@@ -8,7 +8,8 @@
 
 .dashboard-body-tr td {
   height: 56px;
-  padding: 10px 3vh;
+  min-width: 120px;
+  padding: 10px 40px 10px 20px;
   box-shadow: inset 0px 1px 0px #b9b9b9;
 }
 
