@@ -57,7 +57,7 @@ const DataAdmin = () => {
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
               />
-              <AiOutlineSearch className="semua-search-icon" />
+              <AiOutlineSearch className="absolute left-[9%]" />
             </form>
           </div>
         </div>
