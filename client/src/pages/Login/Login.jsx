@@ -22,7 +22,7 @@ const Login = () => {
   return (
     <div className="grid items-center justify-center  w-screen h-screen  font-Poppins">
       <form
-        className="sm:w-[640px] w-screen border border-main-color flex flex-col items-center pt-10 pb-10 shadow-md"
+        className="sm:w-[640px] w-screen sm:border border-main-color flex flex-col items-center pt-10 pb-10 sm:shadow-md"
         onSubmit={handleSubmit}
       >
         <img src={SitpLogo} alt="Sitp Logo" className="w-24 h-12 mb-7" />
