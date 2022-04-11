@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import LogoSitp from "../../assets/img/logo.png";
 import { CgProfile } from "react-icons/cg";
 import { useSelector } from "react-redux";
 import { userRequest } from "../../requestMethods";
 import { Link } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
+
+import "./topbar.css";
 
 const Topbar = ({ setSidebar, sidebar, width }) => {
   const user = useSelector((state) => state.user.currentUser);
@@ -23,14 +24,14 @@ const Topbar = ({ setSidebar, sidebar, width }) => {
   }, []);
 
   return (
-    <nav className="flex w-full h-20 pr-8 pl-9 items-center border-b border-border-main-color bg-white  font-Poppins">
+    <nav className="topbar flex w-full h-20 pr-8 pl-9 items-center border-b border-border-main-color bg-white  font-Poppins">
       <AiOutlineMenu
         className={
           sidebar
             ? width >= 1024
-              ? "text-2xl cursor-pointer"
-              : "text-2xl cursor-pointer ml-40"
-            : "text-2xl cursor-pointer"
+              ? "text-2xl cursor-pointer slide-in"
+              : "text-2xl cursor-pointer slide-out"
+            : "text-2xl cursor-pointer slide-in"
         }
         onClick={() => setSidebar(!sidebar)}
       />
