@@ -2,10 +2,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { userRequest } from "../../requestMethods";
 import { FiEdit2 } from "react-icons/fi";
-import { CgProfile } from "react-icons/cg";
 import { BiImageAdd } from "react-icons/bi";
-import { RiImageEditLine } from "react-icons/ri";
 import Loader from "react-js-loader";
+
+import "./modal_profile.css";
 
 const ModalProfile = ({
   loading,
@@ -44,18 +44,18 @@ const ModalProfile = ({
         <div className="input-profile">
           <label for="input-profile" className="">
             {profilePic ? (
-              <div className="jumbo-pic relative w-52 h-52">
+              <div className="modal-jumbo-pic relative mt-8">
                 <img
                   src={URL.createObjectURL(profilePic)}
                   alt=""
-                  className="w-52 h-52 rounded-full object-cover mt-8"
+                  className="img-modal-profile rounded-full object-cover "
                 />
-                <span className="hover-pic absolute hidden top-0 rounded-full w-52 h-52 bg-overlay-color items-center justify-center">
+                <span className="hover-modal-profile  absolute hidden top-0 rounded-full bg-overlay-color items-center justify-center">
                   <FiEdit2 className="text-6xl text-gray-500" />
                 </span>
               </div>
             ) : (
-              <div className="px-8 py-3 text-white bg-main-blue hover:bg-blue-500 mt-24 rounded-md cursor-pointer flex flex-row items-center ">
+              <div className="modal-profile-button px-8 py-3 text-white bg-main-blue hover:bg-blue-500  rounded-md cursor-pointer flex flex-row items-center ">
                 Upload Image &nbsp; <BiImageAdd className="text-md mt-1" />
               </div>
             )}

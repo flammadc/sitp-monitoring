@@ -1,0 +1,32 @@
+.modal-jumbo-pic,
+.img-modal-profile,
+.hover-modal-profile {
+  width: 13rem;
+  height: 13rem;
+}
+
+.modal-jumbo-pic:hover .hover-modal-profile {
+  display: flex;
+  cursor: pointer;
+}
+
+.modal-profile-button {
+  margin-top: 6rem;
+}
+
+@media (max-width: 830px) {
+  .modal-jumbo-pic,
+  .img-modal-profile,
+  .hover-modal-profile {
+    width: 7rem;
+    height: 7rem;
+  }
+
+  .modal-jumbo-pic {
+    margin-top: 1.25rem;
+  }
+
+  .modal-profile-button {
+    margin-top: 3rem;
+  }
+}
