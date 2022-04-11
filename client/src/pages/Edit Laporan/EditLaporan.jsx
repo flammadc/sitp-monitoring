@@ -181,11 +181,11 @@ const EditLaporan = () => {
             <div class="col-span-12 bg-[#f7f7fc] h-12 border border-[#dcdbdb] flex items-center">
               {laporan.dokumenPendukung?.length ? (
                 <a
-                  href={laporan.dokumenPendukung[0].url}
+                  href={laporan.dokumenPendukung[0]?.url}
                   target="_blank"
                   className="text-blue-500 font-medium font-Poppins text-base pl-6"
                 >
-                  {laporan.dokumenPendukung[0].namaDokumen}
+                  {laporan.dokumenPendukung[0]?.namaDokumen}
                 </a>
               ) : (
                 <div className="text-gray-500 font-medium font-Poppins text-base pl-6">
