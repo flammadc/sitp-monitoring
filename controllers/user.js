@@ -1,5 +1,6 @@
 const User = require("../models/User.js");
 const cloudinary = require("cloudinary").v2;
+const mongoose = require("mongoose");
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
