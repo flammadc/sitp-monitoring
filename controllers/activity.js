@@ -1,4 +1,4 @@
-const Activity = require("../models/activity.js");
+const Activity = require("../models/Activity.js");
 const cloudinary = require("cloudinary").v2;
 const mongoose = require("mongoose");
 
