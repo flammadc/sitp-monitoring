@@ -155,7 +155,7 @@ const uploadDocument = async (req, res) => {
       );
     }
     cloudinary.uploader.upload(
-      req.file.path,
+      "../" + req.file.path,
       { folder: "sitp/dokumen_pendukung" },
       (error, result) => {
         if (error) res.status(500).json(error);
