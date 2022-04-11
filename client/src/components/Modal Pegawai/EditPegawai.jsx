@@ -70,6 +70,7 @@ const EditPegawai = ({ setModal, id }) => {
                 onChange={(e) =>
                   setPegawai({ ...pegawai, nama: e.target.value })
                 }
+                required
               />
             </li>
             <li>
@@ -79,6 +80,7 @@ const EditPegawai = ({ setModal, id }) => {
                 onChange={(e) =>
                   setPegawai({ ...pegawai, email: e.target.value })
                 }
+                required
               />
             </li>
             <li>
@@ -88,6 +90,7 @@ const EditPegawai = ({ setModal, id }) => {
                 onChange={(e) =>
                   setPegawai({ ...pegawai, password: e.target.value })
                 }
+                required
               />
             </li>
             <li>
@@ -97,6 +100,7 @@ const EditPegawai = ({ setModal, id }) => {
                 onChange={(e) =>
                   setPegawai({ ...pegawai, jabatan: e.target.value })
                 }
+                required
               />
             </li>
             <li>
@@ -106,6 +110,7 @@ const EditPegawai = ({ setModal, id }) => {
                 onChange={(e) =>
                   setPegawai({ ...pegawai, nip: e.target.value })
                 }
+                required
               />
             </li>
             <li>
@@ -115,6 +120,7 @@ const EditPegawai = ({ setModal, id }) => {
                   setPegawai({ ...pegawai, isAdmin: e.target.value })
                 }
                 value={pegawai.isAdmin}
+                required
               >
                 <option value={false}>User</option>
                 <option value={true}>Admin</option>
