@@ -33,7 +33,7 @@ const Main = () => {
       </div>
       <motion.div
         className={`sidebar lg:flex flex fixed z-30 top-0  bottom-0 flex-col overflow-y-auto border-r border-border-main-color px-10 py-7  text-font-sec bg-white  font-Poppins `}
-        animate={{ left: sidebar ? "0" : "-50%" }}
+        animate={{ left: sidebar ? "0" : "-85%" }}
         transition={{ duration: 0.5, easings: [0.3, 0.3] }}
       >
         <Sidebar sidebar={sidebar} setSidebar={setSidebar} />
