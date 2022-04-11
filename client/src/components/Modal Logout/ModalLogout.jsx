@@ -21,8 +21,8 @@ const ModalLogout = () => {
     modal && (
       <div className="w-screen h-screen flex items-center justify-center bg-transparent fixed z-40">
         <div className="flex items-center justify-center fixed inset-0 bg-overlay-color z-50"></div>
-        <div className="w-[80vw] lg:w-[50vw] fixed  z-50 min-h-52  grid grid-cols-12 bg-white  shadow-lg font-Lato px-12 py-9 rounded-md ">
-          <div className="text-2xl text-center mb-2 col-span-12 font-bold">
+        <div className="w-[70vw] md:w-[50vw] lg:w-[35vw] fixed  z-50 min-h-52  grid grid-cols-12 bg-white  shadow-lg font-Lato px-12 py-9 rounded-md ">
+          <div className="text-base sm:text-2xl text-center mb-2 col-span-12 font-bold">
             Keluarkan Akun
           </div>
           <div className="text-sm md:text-lg text-center mb-7 col-span-12">
