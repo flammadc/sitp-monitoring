@@ -16,6 +16,7 @@
   margin-top: 16px;
   padding-top: 40px;
   padding-left: 40px;
+  padding-right: 40px;
   background: #ffffff;
   border-radius: 5px;
 }
@@ -58,7 +59,7 @@
 .input-text {
   grid-column: span 12 / span 12;
   height: 52px;
-  margin-right: 40px;
+  
   left: 40px;
   top: 72px;
   padding-left: 10px;
@@ -106,7 +107,7 @@
   grid-column: span 12 / span 12;
   height: 56px;
   /* margin-top: 12px; */
-  margin-right: 40px;
+  
   /* bg */
 
   /* border */
@@ -156,6 +157,7 @@
   border-radius: 6px;
   border: none;
   margin-top: 32px;
+  /*  */
 }
 
 .upload-anchor {
@@ -255,7 +257,7 @@
   .header-upload-box{
     text-align: center;
     font-size: 24px;
-    margin-right: 40px;
+    
   }
 
   .list-content{
@@ -277,8 +279,9 @@ height: 36px;
 /* biru/2 */
 background: #0D8BFF;
 border-radius: 10px;
+margin: auto;
 margin-top: 40px;
-  }
+}
 
   .upload-anchor{
     font-weight: 600;
