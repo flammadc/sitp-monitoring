@@ -40,7 +40,7 @@ const ModalPendidikan = ({
 
   return (
     <div className="black-bg" id="modal-tambah-pendidikan">
-      <div className="white-bg-popup">
+      <div className="white-bg-popup-pendidikan">
         <h1 className="header-popup">Tambah Riwayat Pendidikan</h1>
         <hr className="hr-popup" />
 
