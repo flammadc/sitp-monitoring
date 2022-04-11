@@ -1,0 +1,9 @@
+.topbar .slide-out {
+  margin-left: 10rem;
+  transition: 0.4s ease-in;
+}
+
+.topbar .slide-in {
+  margin-left: 0;
+  transition: 0.35s ease-in;
+}

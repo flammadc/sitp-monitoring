@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { useWindowSize } from "@react-hook/window-size";
 import { Route, Routes } from "react-router-dom";
@@ -30,8 +31,13 @@ const Main = () => {
       <div className="col-span-12">
         <Topbar sidebar={sidebar} setSidebar={setSidebar} width={width} />
       </div>
-
-      {sidebar && <Sidebar sidebar={sidebar} setSidebar={setSidebar} />}
+      <motion.div
+        className={`sidebar lg:flex flex fixed z-30 top-0  bottom-0 flex-col overflow-y-auto border-r border-border-main-color px-10 py-7  text-font-sec bg-white  font-Poppins `}
+        animate={{ left: sidebar ? "0" : "-25%" }}
+        transition={{ duration: 0.5, easings: [0.3, 0.3] }}
+      >
+        <Sidebar sidebar={sidebar} setSidebar={setSidebar} />
+      </motion.div>
 
       <div className="lg:ml-48 col-span-12">
         <Routes>

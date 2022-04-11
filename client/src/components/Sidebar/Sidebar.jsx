@@ -25,9 +25,7 @@ const Sidebar = ({ sidebar, setSidebar }) => {
   const location = useLocation().pathname;
 
   return (
-    <nav
-      className={`sidebar lg:flex flex fixed z-30 top-0 left-0 bottom-0 flex-col overflow-y-auto border-r border-border-main-color px-10 py-7  text-font-sec bg-white  font-Poppins `}
-    >
+    <>
       <img src={LogoSitp} className="mb-12" />
       <div className="mb-9">
         <div className="text-sm mb-2 text-gray-500">Home</div>
@@ -130,7 +128,7 @@ const Sidebar = ({ sidebar, setSidebar }) => {
           </div>
         </div>
       </div>
-    </nav>
+    </>
   );
 };
 
