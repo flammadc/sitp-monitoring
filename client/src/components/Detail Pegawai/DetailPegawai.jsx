@@ -165,7 +165,7 @@ const DetailPegawai = () => {
                 </ul>
               </div>
               <button
-                className="detail-btn btn-diri btn-detail mt-10"
+                className="detail-btn btn-diri button-anchor btn-detail mb-8"
                 onClick={() => setModal({ ...modal, dataDiri: true })}
               >
                 Ubah Data
@@ -192,7 +192,7 @@ const DetailPegawai = () => {
               </div>
 
               <button
-                className="btn-detail detail-btn btn-akun"
+                className="btn-anchor btn-detail  detail-btn btn-akun mb-8"
                 onClick={() => setModal({ ...modal, dataAkun: true })}
               >
                 Ubah Akun

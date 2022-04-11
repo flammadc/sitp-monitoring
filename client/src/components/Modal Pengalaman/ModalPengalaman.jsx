@@ -36,7 +36,7 @@ const ModalPengalaman = ({
   };
   return (
     <div className="black-bg" id="modal-tambah-pengalaman">
-      <div className="white-bg-popup">
+      <div className="white-bg-popup-pendidikan">
         <h1 className="header-popup">Tambah Pengalaman</h1>
         <hr className="hr-popup" />
 
@@ -105,7 +105,7 @@ const ModalPengalaman = ({
           </button>
 
           <button
-            className="button-anchor btn-detail buttons-popup"
+            className="button-anchor btn-detail buttons-popup "
             onClick={handleTambahPengalaman}
             disabled={loading}
           >
