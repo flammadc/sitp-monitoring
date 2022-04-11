@@ -93,7 +93,7 @@ const Dashboard = () => {
           <BoxTahun tahun={tahun ? tahun : 0} className="col-span-6" />
         </div>
 
-        <div className="col-span-12 pt-3 ml-10">
+        <div className="col-span-12 pt-3 sm:ml-10 ml-6">
           {activitiesStat.length ? (
             <Chart data={activitiesStat} />
           ) : (
