@@ -36,7 +36,7 @@ const Sidebar = ({ sidebar, setSidebar }) => {
               ? `flex  text-main-blue hover:text-main-blue cursor-pointer`
               : `flex  hover:text-main-blue cursor-pointer`
           }
-          onClick={() => width <= 1024 && setSidebar(false)}
+          onClick={() => width < 1024 && setSidebar(false)}
         >
           <div className="text-xl mr-2">
             <MdDashboard />
@@ -56,7 +56,7 @@ const Sidebar = ({ sidebar, setSidebar }) => {
               ? `flex text-main-blue hover:text-main-blue cursor-pointer`
               : `flex hover:text-main-blue cursor-pointer`
           }
-          onClick={() => width <= 1024 && setSidebar(false)}
+          onClick={() => width < 1024 && setSidebar(false)}
         >
           <div className="text-xl mr-2">
             <FaTasks />
@@ -72,7 +72,7 @@ const Sidebar = ({ sidebar, setSidebar }) => {
               ? `flex text-main-blue hover:text-main-blue cursor-pointer`
               : `flex hover:text-main-blue cursor-pointer`
           }
-          onClick={() => width <= 1024 && setSidebar(false)}
+          onClick={() => width < 1024 && setSidebar(false)}
         >
           <div className="text-xl mr-2">
             <VscNewFile />
@@ -92,7 +92,7 @@ const Sidebar = ({ sidebar, setSidebar }) => {
                 ? `flex text-main-blue hover:text-main-blue cursor-pointer`
                 : `flex hover:text-main-blue cursor-pointer`
             }
-            onClick={() => width <= 1024 && setSidebar(false)}
+            onClick={() => width < 1024 && setSidebar(false)}
           >
             <div className="text-xl mr-2">
               <FaUsers />
@@ -110,7 +110,7 @@ const Sidebar = ({ sidebar, setSidebar }) => {
               ? `flex text-main-blue hover:text-main-blue cursor-pointer`
               : `flex hover:text-main-blue cursor-pointer`
           }
-          onClick={() => width <= 1024 && setSidebar(false)}
+          onClick={() => width < 1024 && setSidebar(false)}
         >
           <div className="text-xl mr-2">
             <CgProfile />
