@@ -44,12 +44,11 @@ const login = async (req, res) => {
 
     const accessToken = jwt.sign(
       { id: user._id, isAdmin: user.isAdmin },
-      process.env.JWT_SEC_KEY,
-      { expiresIn: "8h" }
+      process.env.JWT_SEC_KEY
     );
 
     const { password, ...others } = user._doc;
-    res.status(201).json({ ...others, accessToken });
+    res.status(201).json({ ...others });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
