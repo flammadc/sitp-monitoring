@@ -30,7 +30,10 @@ const DataTable = ({ a }) => {
               <div className="ml-3">{user?.nama}</div>
             </>
           ) : (
-            <CgProfile className="w-8 h-8 mr-5" />
+            <>
+              <CgProfile className="w-8 h-8" />
+              <div className="ml-3">{user?.nama}</div>
+            </>
           )
         ) : (
           <Loader
