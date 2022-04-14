@@ -4,9 +4,11 @@ import Loader from "react-js-loader";
 import { userRequest } from "../../requestMethods";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
 
 const Upload = () => {
   const user = useSelector((state) => state.user.currentUser);
+  const [dokumentasi, setDokumentasi] = useState([]);
   const navigate = useNavigate();
   const [laporan, setLaporan] = useState({
     judul: "",
@@ -54,7 +56,6 @@ const Upload = () => {
       navigate("/data");
     }
   };
-
   return (
     <div className="upload-box">
       <form className="content-upload-box" onSubmit={handleSubmit}>
@@ -150,6 +151,42 @@ const Upload = () => {
           {error && (
             <p className="text-md text-red-600 font-bold">File PDF Only</p>
           )}
+        </div>
+
+        <div className="list-file mt-5">
+          <label className="header-file">Tambahkan Dokumentasi</label>
+          <div className="">
+            <label className="" htmlFor="dokumentasi">
+              <div className="flex flex-row">
+                {dokumentasi.length > 0 &&
+                  dokumentasi.map((d) => {
+                    return (
+                      <div className="relative">
+                        <img
+                          src={URL.createObjectURL(d)}
+                          className="dokumentasi-image w-36 h-36 object-cover border border-border-main-color mr-3"
+                        />
+                        <span>
+                          <AiOutlineClose className="delete-dokumentasi-icon hidden absolute inset-1/2" />
+                        </span>
+                      </div>
+                    );
+                  })}
+                <div className="flex items-center justify-center w-36 h-36 border border-border-main-color  cursor-pointer">
+                  <AiOutlinePlus className="text-black text-[50px]" />
+                </div>
+              </div>
+            </label>
+            <input
+              className="hidden"
+              id="dokumentasi"
+              type="file"
+              onChange={(e) =>
+                e.target.files[0] &&
+                setDokumentasi([...dokumentasi, e.target.files[0]])
+              }
+            />
+          </div>
         </div>
 
         <button

@@ -1,6 +1,6 @@
 .upload-box {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr) );
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   padding-right: 40px;
   margin-left: 45px;
 }
@@ -59,7 +59,7 @@
 .input-text {
   grid-column: span 12 / span 12;
   height: 52px;
-  
+
   left: 40px;
   top: 72px;
   padding-left: 10px;
@@ -107,7 +107,7 @@
   grid-column: span 12 / span 12;
   height: 56px;
   /* margin-top: 12px; */
-  
+
   /* bg */
 
   /* border */
@@ -251,41 +251,44 @@
 
 /* popup */
 
-
-@media(max-width:500px){
-
-  .header-upload-box{
+@media (max-width: 500px) {
+  .header-upload-box {
     text-align: center;
     font-size: 24px;
-    
   }
 
-  .list-content{
+  .list-content {
     margin-bottom: 32px;
   }
 
-  .list-content, .header-file, .section-file{
+  .list-content,
+  .header-file,
+  .section-file {
     font-size: 14px;
   }
 
-  .label-text{
+  .label-text {
     margin-left: 0;
   }
 
-  .upload-button{
+  .upload-button {
     width: 112px;
-height: 36px;
+    height: 36px;
 
-/* biru/2 */
-background: #0D8BFF;
-border-radius: 10px;
-margin: auto;
-margin-top: 40px;
+    /* biru/2 */
+    background: #0d8bff;
+    border-radius: 10px;
+    margin: auto;
+    margin-top: 40px;
+  }
+
+  .upload-anchor {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+  }
 }
 
-  .upload-anchor{
-    font-weight: 600;
-font-size: 12px;
-line-height: 18px;
-  }
+.dokumentasi-image:hover .delete-dokumentasi-icon {
+  display: block;
 }
