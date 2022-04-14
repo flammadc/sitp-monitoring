@@ -14,6 +14,7 @@ import RequireRole from "./utils/RequireRole";
 
 // CSS
 import "./app.css";
+import About from "./pages/About/About";
 
 function App() {
   const cookies = new Cookies();
@@ -40,6 +41,7 @@ function App() {
       {modal && <ModalLogout />}
       <Routes>
         <Route path={"/login"} element={<Login />}></Route>
+        <Route path={"/about"} element={<About />}></Route>
         <Route element={<RequireRole />}>
           <Route path="*" element={<Main />}></Route>
         </Route>

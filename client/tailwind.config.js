@@ -30,6 +30,8 @@ module.exports = {
         Poppins: ["Poppins", "sans-serif"],
         Lato: ["Lato", "sans-serif"],
         Mulish: ["Mulish", "sans-serif"],
+        Quicksand: ["Quicksand", "sans-serif"],
+        Opensans: ["Open Sans", "sans-serif"],
       },
       translate: {
         "50-": "-50%",
