@@ -130,64 +130,144 @@ const Upload = () => {
           />
         </div>
 
-        <div className="list-file">
-          <label className="header-file">Tambahkan File</label>
-          <div className="section-file">
-            <label className="label-file" htmlFor="upload">
-              Browse...
-            </label>
-            <input
-              className="input-file"
-              id="upload"
-              type="file"
-              onChange={(e) => setDokumenPendukung(e.target.files[0])}
-            />
-            {dokumenPendukung && (
-              <div className="div w-full ml-3 font-medium font-Poppins text-gray-500">
-                {dokumenPendukung.name}
+        <div className="list-content">
+          <label className="label-text">Jumlah peserta</label>
+          <div className="internal ml-3">
+            <div className="flex gap-2 items-center">
+              <div className="w-[10px] h-[10px] bg-[#C4C4C4] rounded-full"></div>
+              <div className="font-Poppins text-base font-medium text-struktur">Internal :</div>
+              <input className="w-[52px] font-Poppins text-base font-medium text-input text-center border-b" placeholder="20" type="number" />
+            </div>
+
+            <div className="flex gap-10 items-center ml-5">
+
+              <div className="flex gap-2 items-center">
+                <input className="w-[10px] h-[10px] border-2 border-[#C4C4C4] rounded-none" type="checkbox" id="psie" />
+                <label className="font-Poppins text-base font-medium text-struktur" htmlFor="psie">PSIE</label>
               </div>
-            )}
+
+              <div className="flex gap-2 items-center">
+                <input className="w-[10px] h-[10px] border-2 border-[#C4C4C4] rounded-none" type="checkbox" id="psii" />
+                <label className="font-Poppins text-base font-medium text-struktur" htmlFor="psii">PSII</label>
+              </div>
+
+              <div className="flex gap-2 items-center">
+                <input className="w-[10px] h-[10px] border-2 border-[#C4C4C4] rounded-none" type="checkbox" id="pssip" />
+                <label className="font-Poppins text-base font-medium text-struktur" htmlFor="pssip">PSSIP</label>
+              </div>
+
+              <div className="flex gap-2 items-center">
+                <input className="w-[10px] h-[10px] border-2 border-[#C4C4C4] rounded-none" type="checkbox" id="DDDDDD" />
+                <label className="font-Poppins text-base font-medium text-struktur" htmlFor="DDDDDD">DDDDDD</label>
+              </div>
+
+              <div className="flex gap-2 items-center">
+                <input className="w-[10px] h-[10px] border-2 border-[#C4C4C4] rounded-none" type="checkbox" id="EEEEEE" />
+                <label className="font-Poppins text-base font-medium text-struktur" htmlFor="EEEEEE">EEEEEE</label>
+              </div>
+
+              <div className="flex gap-2 items-center">
+                <input className="w-[10px] h-[10px] border-2 border-[#C4C4C4] rounded-none" type="checkbox" id="FFFFFF" />
+                <label className="font-Poppins text-base font-medium text-struktur" htmlFor="FFFFFF">FFFFFF</label>
+              </div>
+
+            </div>
+
+
+
           </div>
-          {error && (
-            <p className="text-md text-red-600 font-bold">File PDF Only</p>
-          )}
+          <div className="eksternal ml-3">
+            <div className="flex gap-2 items-center">
+              <div className="w-[10px] h-[10px] bg-[#C4C4C4] rounded-full"></div>
+              <div className="font-Poppins text-base font-medium text-struktur">Eksternal :</div>
+              <input className="w-[52px] font-Poppins text-base font-medium text-input text-center border-b" placeholder="20" type="number" />
+            </div>
+            <button className="w-[160px] h-[30px] mt-4 border rounded-sm bg-[#F7F7FC] border-[#DCDBDB] font-Poppins text-sm font-medium text-struktur">Total Peserta</button>
+          </div>
         </div>
 
-        <div className="list-file mt-5">
-          <label className="header-file">Tambahkan Dokumentasi</label>
-          <div className="">
-            <label className="" htmlFor="dokumentasi">
-              <div className="flex flex-row">
-                {dokumentasi.length > 0 &&
-                  dokumentasi.map((d) => {
-                    return (
-                      <div className="relative">
-                        <img
-                          src={URL.createObjectURL(d)}
-                          className="dokumentasi-image w-36 h-36 object-cover border border-border-main-color mr-3"
-                        />
-                        <span>
-                          <AiOutlineClose className="delete-dokumentasi-icon hidden absolute inset-1/2" />
-                        </span>
-                      </div>
-                    );
-                  })}
-                <div className="flex items-center justify-center w-36 h-36 border border-border-main-color  cursor-pointer">
-                  <AiOutlinePlus className="text-black text-[50px]" />
-                </div>
+        <div className="list-content">
+          <label className="label-text">Tambahkan File</label>
+          <div className="ml-3">
+            <div className="">
+              <div className="flex gap-2 items-center">
+                <div className="w-[10px] h-[10px] bg-[#C4C4C4] rounded-full"></div>
+                <div className="font-Poppins text-base font-medium text-struktur">Undangan</div>
               </div>
-            </label>
-            <input
-              className="hidden"
-              id="dokumentasi"
-              type="file"
-              onChange={(e) =>
-                e.target.files[0] &&
-                setDokumentasi([...dokumentasi, e.target.files[0]])
-              }
-            />
+              <div className="section-file mt-[6px]">
+                <label className="label-file" htmlFor="undangan">
+                  Browse...
+                </label>
+                <input
+                  className="input-file"
+                  id="undangan"
+                  type="file"
+                  onChange={(e) => setDokumenPendukung(e.target.files[0])}
+                />
+                {dokumenPendukung && (
+                  <div className="div w-full ml-3 font-medium font-Poppins text-gray-500">
+                    {dokumenPendukung.name}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="mt-3">
+              <div className="flex gap-2 items-center">
+                <div className="w-[10px] h-[10px] bg-[#C4C4C4] rounded-full"></div>
+                <div className="font-Poppins text-base font-medium text-struktur">Surat Tugas</div>
+              </div>
+              <div className="section-file mt-[6px]">
+                <label className="label-file" htmlFor="tugas">
+                  Browse...
+                </label>
+                <input
+                  className="input-file"
+                  id="tugas"
+                  type="file"
+                  onChange={(e) => setDokumenPendukung(e.target.files[0])}
+                />
+                {dokumenPendukung && (
+                  <div className="div w-full ml-3 font-medium font-Poppins text-gray-500">
+                    {dokumenPendukung.name}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="mt-3 mb-[237px]">
+              <div className="flex gap-2 items-center">
+                <div className="w-[10px] h-[10px] bg-[#C4C4C4] rounded-full"></div>
+                <div className="font-Poppins text-base font-medium text-struktur">Daftar Hadir</div>
+              </div>
+              <div className="section-file mt-[6px]">
+                <label className="label-file" htmlFor="kehadiran">
+                  Browse...
+                </label>
+                <input
+                  className="input-file"
+                  id="kehadiran"
+                  type="file"
+                  onChange={(e) => setDokumenPendukung(e.target.files[0])}
+                />
+                {dokumenPendukung && (
+                  <div className="div w-full ml-3 font-medium font-Poppins text-gray-500">
+                    {dokumenPendukung.name}
+                  </div>
+                )}
+              </div>
+            </div>
+
           </div>
+
+
+
+
+
+
         </div>
+
+
 
         <button
           className={

@@ -11,7 +11,8 @@ module.exports = {
         "white-sec": "#F7F7FC",
         "thead-text": "#5550bd",
         "overlay-color": "rgba(50,50,50,0.3)",
-        struktur: "rgba(64, 69, 87, 0.7)",
+        "struktur": "rgba(64, 69, 87, 0.7)",
+        "input": "rgba(71, 68, 68, 0.3)",
       },
       backgroundImage: {
         "box-tahun":
