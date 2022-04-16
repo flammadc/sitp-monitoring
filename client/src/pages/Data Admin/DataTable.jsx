@@ -25,7 +25,7 @@ const DataTable = ({ a }) => {
             <>
               <img
                 src={user?.profilePic[0].url}
-                className="min-w-[32px] h-8 object-cover rounded-full"
+                className="w-8 h-8 object-cover rounded-full"
               />
               <div className="ml-3">{user?.nama}</div>
             </>
