@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema(
     isAdmin: { type: Boolean, default: false },
     nip: { type: String, unique: true },
     email: { type: String, unique: true },
-    password: String,
+    password: { type: String, required: true },
     profilePic: [
       {
         picId: { type: String },
