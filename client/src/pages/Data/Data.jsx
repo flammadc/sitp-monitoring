@@ -11,6 +11,8 @@ import { useSelector } from "react-redux";
 const Data = () => {
   const user = useSelector((state) => state.user.currentUser);
   const [initialLoading, setInitialLoading] = useState();
+  const thisMonth = new Date(Date.now()).getMonth() + 1;
+  const [filter, setFilter] = useState("tahun");
   const [keyword, setKeyword] = useState("");
   const [searchMode, setSearchMode] = useState(false);
   const [activities, setActivities] = useState();
@@ -20,39 +22,67 @@ const Data = () => {
       setInitialLoading(true);
       try {
         const res = await userRequest.get(`/activities?id=${user._id}`);
-        setActivities(res.data);
+        filter == "tahun"
+          ? setActivities(res.data)
+          : setActivities(filterActivity(res.data));
+        setInitialLoading(false);
       } catch (error) {
         console.log(error);
+        setInitialLoading(false);
       }
     };
     getActvities();
-    setInitialLoading(false);
-  }, []);
+  }, [user._id, filter]);
 
   const handleSearch = async (e) => {
     e.preventDefault();
+    setInitialLoading(true);
     let res;
     try {
       if (keyword == "") {
         res = await userRequest.get(`activities?id=${user._id}`);
+        setSearchMode(false);
       } else {
         res = await userRequest.get(`activities/search/${keyword}`, {
           params: { userId: user._id },
         });
       }
-      setActivities(res.data);
+      filter == "tahun"
+        ? setActivities(res.data)
+        : setActivities(filterActivity(res.data));
+      setInitialLoading(false);
     } catch (error) {
       console.log(error);
+      setInitialLoading(false);
     }
   };
+
+  const filterActivity = (activities) => {
+    const filteredActivity = activities.filter((a) => {
+      return new Date(a.selesai).getMonth() + 1 === thisMonth;
+    });
+    return filteredActivity;
+  };
+
+  console.log(initialLoading);
 
   return (
     <div className="grid grid-cols-12 sm:pr-10 sm:pt-10 pr-5 pt-5">
       <div className="col-span-12 shadow-md ml-8 sm:ml-16  pr-5 pl-6 pb-8 pt-7 bg-white rounded-lg">
         <div className="col-span-12 grid grid-cols-12  sm:mb-7  mb-3">
-          <h1 className="header-semua-box sm:text-left text-center sm:col-span-7 col-span-12 mb-3 sm:mb-0">
-            Daftar Laporan Kegiatan
-          </h1>
+          <div className="col-span-12 sm:col-span-7 flex flex-col sm:flex-row items-center mb-3 sm:mb-0">
+            <h1 className="header-semua-box sm:text-left text-center sm:col-span-3 col-span-12 mb-3 sm:mb-0 mr-5">
+              Daftar Laporan Kegiatan
+            </h1>
+            <select
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+              className="w-36 font-Mulish bg-white-sec border border-border-main-color shadow-sm"
+            >
+              <option value={"tahun"}>Tahun Ini</option>
+              <option value={"bulan"}>Bulan Ini</option>
+            </select>
+          </div>
           <div className="sm:col-span-5 col-span-12 sm:mx-0 mx-auto sm:ml-auto ml-0 flex justify-center items-center">
             <form
               className="semua-search-input relative  flex flex-row items-center ml-auto  text-[#9A9AB0]"
@@ -84,7 +114,7 @@ const Data = () => {
           </div>
         ) : (
           <div className="table-container col-span-12 grid grid-cols-12 overflow-x-auto">
-            <table className="col-span-12 whitespace-nowrap ">
+            <table className="col-span-12 whitespace-nowrap overflow-hidden">
               <thead className="thead">
                 <tr>
                   <td>No</td>
@@ -119,16 +149,18 @@ const Data = () => {
                     );
                   })
                 ) : searchMode ? (
-                  <td colSpan={7}>
-                    <h2 className="flex flex-row items-center justify-center text-gray-500">
-                      Pencarian Tidak Ditemukan
-                    </h2>
-                  </td>
+                  <tr>
+                    <td colSpan={7}>
+                      <h2 className="flex flex-row items-center justify-center text-gray-500">
+                        Pencarian Tidak Ditemukan
+                      </h2>
+                    </td>
+                  </tr>
                 ) : (
                   <tr>
                     <td className="text-base  pt-7" colSpan={7}>
                       <div className="flex flex-row items-center justify-center text-gray-500">
-                        <h2 className="flex flex-row items-center">
+                        <h2 className="flex flex-row items-center font-poppins">
                           Belum Ada Laporan, Upload Di Icon &nbsp;
                           <VscNewFile className="text-main-blue" />
                         </h2>
