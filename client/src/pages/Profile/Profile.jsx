@@ -150,12 +150,14 @@ const Profile = () => {
 
                 <ul className="diri-detail-isi list-style-none">
                   <li>{profile?.nama}</li>
-                  <li>{profile?.noTelp}</li>
+                  <li>{profile?.noTelp ? profile.noTelp : "Belum Diisi"}</li>
                   <li>{profile?.nip}</li>
 
                   <li>
                     {profile?.pendidikanTerakhir?.length >= 1
-                      ? profile.pendidikanTerakhir.reverse()[0].jurusan
+                      ? profile.pendidikanTerakhir[
+                          profile.pendidikanTerakhir.length - 1
+                        ].jurusan
                       : "Belum Diisi"}
                   </li>
                 </ul>
