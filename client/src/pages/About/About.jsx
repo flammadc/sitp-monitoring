@@ -16,6 +16,7 @@ import BottomRow from "../../assets/svg/bottom-row.svg";
 import ProfileRangga from "../../assets/svg/profile-rangga.svg";
 import ProfileRaffi from "../../assets/svg/profile-raffi.svg";
 import ProfileRidho from "../../assets/svg/profile-ridho.svg";
+import { Link } from "react-router-dom";
 
 const About = () => {
   return (
@@ -29,9 +30,12 @@ const About = () => {
         <h1 className="sm:ml-2.5 sm:font-Quicksand sm:font-semibold sm:text-xl ml-2 font-Lato font-bold text-base">
           PKL SMK Negeri 2 Jakarta 2022
         </h1>
-        <button className="btn-login ml-auto sm:w-28 sm:h-10 rounded-md font-bold sm:text-sm w-12 h-7   font-Quicksand border border-main-blue text-main-blue text-xs bg-white hover:bg-main-blue hover:text-white">
+        <Link
+          className="btn-login flex items-center justify-center ml-auto sm:w-28 sm:h-10 rounded-md font-bold sm:text-sm w-12 h-7   font-Quicksand border border-main-blue text-main-blue text-xs bg-white hover:bg-main-blue hover:text-white"
+          to="/login"
+        >
           Login
-        </button>
+        </Link>
       </nav>
       <div className="bg-white sm:pt-20 pt-14 about-container">
         <div className="grid-cols-12 lg:px-40 sm:px-32 px-10 flex lg:flex-row flex-col  items-center lg:gap-28 lg:text-left text-center ">
