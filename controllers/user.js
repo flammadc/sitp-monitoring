@@ -28,12 +28,12 @@ const updateUser = async (req, res) => {
       !user && res.status(404).json("Account Not Found");
       if (req.body.password) {
         const genSalt = await bcrypt.genSalt(10);
-        updatedHashedPass = await bcrypt.hash(req.body.password, genSalt);
+        req.body.password = await bcrypt.hash(req.body.password, genSalt);
       }
       const updatedUser = await User.findByIdAndUpdate(
         req.params.id,
         {
-          $set: { ...req.body, password: updatedHashedPass },
+          $set: { ...req.body },
         },
         { new: true }
       );
