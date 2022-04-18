@@ -19,7 +19,6 @@ const AddPegawai = ({ setModal }) => {
     setLoading(true);
     try {
       const res = await userRequest.post("auth/register", pegawai);
-      console.log(res.data);
       setLoading(false);
       setModal({ tambah: false });
     } catch (error) {

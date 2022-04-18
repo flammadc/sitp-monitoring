@@ -64,8 +64,6 @@ const Data = () => {
     return filteredActivity;
   };
 
-  console.log(initialLoading);
-
   return (
     <div className="grid grid-cols-12 sm:pr-10 sm:pt-10 pr-5 pt-5">
       <div className="col-span-12 shadow-md ml-8 sm:ml-16  pr-5 pl-6 pb-8 pt-7 bg-white rounded-lg">

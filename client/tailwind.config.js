@@ -33,9 +33,14 @@ module.exports = {
         Mulish: ["Mulish", "sans-serif"],
         Quicksand: ["Quicksand", "sans-serif"],
         Opensans: ["Open Sans", "sans-serif"],
+        Inter: ["Inter", "sans-serif"],
       },
       translate: {
         "50-": "-50%",
+      },
+      boxShadow: {
+        box: "0px 4px 5px rgba(0, 0, 0, 0.25)",
+        chart: "0px 3px 8px rgba(0, 0, 0, 0.25)",
       },
     },
   },
