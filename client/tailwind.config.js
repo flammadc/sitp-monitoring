@@ -32,6 +32,7 @@ module.exports = {
         Mulish: ["Mulish", "sans-serif"],
         Quicksand: ["Quicksand", "sans-serif"],
         Opensans: ["Open Sans", "sans-serif"],
+        Inter: ["Inter", "sans-serif"],
       },
       translate: {
         "50-": "-50%",
