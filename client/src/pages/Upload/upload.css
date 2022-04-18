@@ -105,7 +105,7 @@
 
 .section-file {
   grid-column: span 12 / span 12;
-  height: 56px;
+  height: 40px;
   /* margin-top: 12px; */
 
   /* bg */
@@ -129,13 +129,13 @@
   background: #f7f7fc;
   font-style: normal;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 24px;
   width: 98px;
-  height: 54px;
+  height: 40px;
   border-right: 1px solid #dcdbdb;
   text-align: center;
-  line-height: 56px;
+  line-height: 40px;
   font-family: "Poppins";
   /* table-font */
 
@@ -251,7 +251,7 @@
 
 /* popup */
 
-@media (max-width: 500px) {
+@media (max-width: 640px) {
   .header-upload-box {
     text-align: center;
     font-size: 24px;
@@ -265,6 +265,17 @@
   .header-file,
   .section-file {
     font-size: 14px;
+    font-weight: 600;
+  }
+
+  .section-file,
+  .label-file {
+    height: 36px;
+  }
+
+  .label-file {
+    font-size: 12px;
+    line-height: 36px;
   }
 
   .label-text {

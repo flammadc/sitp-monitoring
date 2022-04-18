@@ -5,6 +5,7 @@ import { userRequest } from "../../requestMethods";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
+import avatar from "../../assets/img/avatar.png";
 
 const Upload = () => {
   const user = useSelector((state) => state.user.currentUser);
@@ -130,62 +131,326 @@ const Upload = () => {
           />
         </div>
 
-        <div className="list-file">
-          <label className="header-file">Tambahkan File</label>
-          <div className="section-file">
-            <label className="label-file" htmlFor="upload">
-              Browse...
-            </label>
-            <input
-              className="input-file"
-              id="upload"
-              type="file"
-              onChange={(e) => setDokumenPendukung(e.target.files[0])}
-            />
-            {dokumenPendukung && (
-              <div className="div w-full ml-3 font-medium font-Poppins text-gray-500">
-                {dokumenPendukung.name}
+        <div className="list-content">
+          <label className="label-text">Jumlah peserta</label>
+          <div className="internal sm:ml-3">
+            <div className="flex gap-2 items-center">
+              <div className="sm:w-[10px] sm:h-[10px] w-[6px] h-[6px] bg-[#C4C4C4] rounded-full"></div>
+              <div className="font-Poppins sm:text-base sm:font-medium text-sm font-normal text-struktur">
+                Internal :
               </div>
-            )}
+              <input
+                className="sm:w-[52px] w-[40px] font-Poppins sm:text-sm sm:font-medium text-xs font-normal text-[#474444] text-center border-b border-struktur"
+                placeholder="20"
+                type="number"
+              />
+            </div>
+
+            <div className="grid sm:grid-cols-6 grid-cols-3 sm:gap-10 gap-y-1 gap-x-14 items-center sm:mt-3 mt-2  sm:ml-[18px] ml-[15px]">
+              <div className="flex gap-2 items-center">
+                <input
+                  className="sm:w-[10px] sm:h-[10px] w-[8px] h-[8px] border-2 border-[#C4C4C4] rounded-none"
+                  type="checkbox"
+                  id="psie"
+                />
+                <label
+                  className="font-Poppins sm:text-base text-xs font-medium text-struktur"
+                  htmlFor="psie"
+                >
+                  PSIE
+                </label>
+              </div>
+
+              <div className="flex gap-2 items-center">
+                <input
+                  className="sm:w-[10px] sm:h-[10px] w-[8px] h-[8px] border-2 border-[#C4C4C4] rounded-none"
+                  type="checkbox"
+                  id="psii"
+                />
+                <label
+                  className="font-Poppins sm:text-base text-xs font-medium text-struktur"
+                  htmlFor="psii"
+                >
+                  PSII
+                </label>
+              </div>
+
+              <div className="flex gap-2 items-center">
+                <input
+                  className="sm:w-[10px] sm:h-[10px] w-[8px] h-[8px] border-2 border-[#C4C4C4] rounded-none"
+                  type="checkbox"
+                  id="pssip"
+                />
+                <label
+                  className="font-Poppins sm:text-base text-xs font-medium text-struktur"
+                  htmlFor="pssip"
+                >
+                  PSSIP
+                </label>
+              </div>
+
+              <div className="flex gap-2 items-center">
+                <input
+                  className="sm:w-[10px] sm:h-[10px] w-[8px] h-[8px] border-2 border-[#C4C4C4] rounded-none"
+                  type="checkbox"
+                  id="DDDDDD"
+                />
+                <label
+                  className="font-Poppins sm:text-base text-xs font-medium text-struktur"
+                  htmlFor="DDDDDD"
+                >
+                  DDDDDD
+                </label>
+              </div>
+
+              <div className="flex gap-2 items-center">
+                <input
+                  className="sm:w-[10px] sm:h-[10px] w-[8px] h-[8px] border-2 border-[#C4C4C4] rounded-none"
+                  type="checkbox"
+                  id="EEEEEE"
+                />
+                <label
+                  className="font-Poppins sm:text-base text-xs font-medium text-struktur"
+                  htmlFor="EEEEEE"
+                >
+                  EEEEEE
+                </label>
+              </div>
+
+              <div className="flex gap-2 items-center">
+                <input
+                  className="sm:w-[10px] sm:h-[10px] w-[8px] h-[8px] border-2 border-[#C4C4C4] rounded-none"
+                  type="checkbox"
+                  id="FFFFFF"
+                />
+                <label
+                  className="font-Poppins sm:text-base text-xs font-medium text-struktur"
+                  htmlFor="FFFFFF"
+                >
+                  FFFFFF
+                </label>
+              </div>
+            </div>
           </div>
-          {error && (
-            <p className="text-md text-red-600 font-bold">File PDF Only</p>
-          )}
+          <div className="eksternal sm:ml-3">
+            <div className="flex gap-2 items-center">
+              <div className="sm:w-[10px] sm:h-[10px] w-[6px] h-[6px] bg-[#C4C4C4] rounded-full"></div>
+              <div className="font-Poppins  sm:text-base sm:font-medium text-sm font-normal text-struktur">
+                Eksternal :
+              </div>
+              <input
+                className="sm:w-[52px] w-[40px] font-Poppins sm:text-sm sm:font-medium text-xs font-normal text-[#474444] text-center border-b border-struktur"
+                placeholder="20"
+                type="number"
+              />
+            </div>
+            <div className="flex gap-2 items-center sm:mt-3 mt-[6px] sm:ml-[18px] ml-[15px]">
+              <div className="font-Poppins  sm:text-sm text-xs font-medium text-struktur">
+                Nama Kantor :
+              </div>
+              <input
+                className="w-40 font-Poppins sm:text-sm sm:font-medium text-xs font-normal text-[#474444] text-center border-b border-struktur"
+                placeholder="Lenovo Jakarta"
+                type="text"
+              />
+            </div>
+          </div>
+
+          <div className="sm:ml-3">
+            <div className="flex gap-2 items-center">
+              <div className="sm:w-[10px] sm:h-[10px] w-[6px] h-[6px] bg-[#C4C4C4] rounded-full"></div>
+              <div className="font-Poppins  sm:text-base sm:font-medium text-sm font-normal text-struktur">
+                Total Peserta :
+              </div>
+            </div>
+            <input
+              placeholder="Total Peserta"
+              type="text"
+              className="w-[168px] h-[30px] text-center sm:mt-4 mt-2 sm:ml-[18px] border rounded-sm bg-[#F7F7FC] border-[#DCDBDB] font-Poppins sm:text-sm sm:font-medium text-xs font-normal text-struktur"
+            />
+          </div>
         </div>
 
-        <div className="list-file mt-5">
-          <label className="header-file">Tambahkan Dokumentasi</label>
-          <div className="">
-            <label className="" htmlFor="dokumentasi">
-              <div className="flex flex-row">
-                {dokumentasi.length > 0 &&
-                  dokumentasi.map((d) => {
-                    return (
-                      <div className="relative">
-                        <img
-                          src={URL.createObjectURL(d)}
-                          className="dokumentasi-image w-36 h-36 object-cover border border-border-main-color mr-3"
-                        />
-                        <span>
-                          <AiOutlineClose className="delete-dokumentasi-icon hidden absolute inset-1/2" />
-                        </span>
-                      </div>
-                    );
-                  })}
-                <div className="flex items-center justify-center w-36 h-36 border border-border-main-color  cursor-pointer">
-                  <AiOutlinePlus className="text-black text-[50px]" />
+        <div className="flex flex-col">
+          <h1 className="font-Poppins text-sm font-semibold text-font-sec sm:text-lg sm:font-medium">
+            Tambahkan File
+          </h1>
+          <div className="sm:ml-3 mt-3 sm:mt-6">
+            <div className="">
+              <label
+                htmlFor="undangan"
+                className="flex sm:gap-2 gap-3 items-center"
+              >
+                <div className="sm:w-[10px] sm:h-[10px] w-[6px] h-[6px] bg-[#C4C4C4] rounded-full"></div>
+                <div className="font-Poppins sm:text-base sm:font-medium text-xs font-normal text-struktur">
+                  Undangan
+                </div>
+              </label>
+              <div className="section-file mt-[6px]">
+                <label className="label-file" htmlFor="undangan">
+                  Browse...
+                </label>
+                <input
+                  className="input-file"
+                  id="undangan"
+                  type="file"
+                  onChange={(e) => setDokumenPendukung(e.target.files[0])}
+                />
+                {dokumenPendukung && (
+                  <div className="div w-full ml-3 font-medium font-Poppins text-main-blue">
+                    {dokumenPendukung.name}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="mt-3">
+              <label
+                htmlFor="tugas"
+                className="flex sm:gap-2 gap-3 items-center"
+              >
+                <div className="sm:w-[10px] sm:h-[10px] w-[6px] h-[6px] bg-[#C4C4C4] rounded-full"></div>
+                <div className="font-Poppins sm:text-base sm:font-medium text-xs font-normal text-struktur">
+                  Surat Tugas
+                </div>
+              </label>
+              <div className="section-file mt-[6px]">
+                <label className="label-file" htmlFor="tugas">
+                  Browse...
+                </label>
+                <input
+                  className="input-file"
+                  id="tugas"
+                  type="file"
+                  onChange={(e) => setDokumenPendukung(e.target.files[0])}
+                />
+                {dokumenPendukung && (
+                  <div className="div w-full ml-3 font-medium font-Poppins text-main-blue">
+                    {dokumenPendukung.name}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="mt-3">
+              <label
+                htmlFor="kehadiran"
+                className="flex sm:gap-2 gap-3 items-center"
+              >
+                <div className="sm:w-[10px] sm:h-[10px] w-[6px] h-[6px] bg-[#C4C4C4] rounded-full"></div>
+                <div className="font-Poppins sm:text-base sm:font-medium text-xs font-normal text-struktur">
+                  Daftar Hadir
+                </div>
+              </label>
+              <div className="section-file mt-[6px]">
+                <label className="label-file" htmlFor="kehadiran">
+                  Browse...
+                </label>
+                <input
+                  className="input-file"
+                  id="kehadiran"
+                  type="file"
+                  onChange={(e) => setDokumenPendukung(e.target.files[0])}
+                />
+                {dokumenPendukung && (
+                  <div className="div w-full ml-3 font-medium font-Poppins text-main-blue">
+                    {dokumenPendukung.name}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="mt-3">
+              <label
+                htmlFor="dokumentasi"
+                className="flex sm:gap-2 gap-3 items-center"
+              >
+                <div className="sm:w-[10px] sm:h-[10px] w-[6px] h-[6px] bg-[#C4C4C4] rounded-full"></div>
+                <div className="font-Poppins sm:text-base sm:font-medium text-xs font-normal text-struktur">
+                  Dokumentasi
+                </div>
+              </label>
+              <div className="flex gap-4 sm:gap-6">
+                <div className="sm:w-[100px] sm:h-[100px] w-[60px] h-[60px] mt-[6px] border bg-white flex items-center justify-center ">
+                  <img src={avatar} alt="" />
+                  <input className="hidden" type="file" id="dokumentasi" />
+                </div>
+                <div className="sm:w-[100px] sm:h-[100px] w-[60px] h-[60px] mt-[6px] border bg-white flex items-center justify-center ">
+                  <label htmlFor="dokumentasi">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="sm:h-[50px] sm:w-[50px] w-[20px] h-[20px] fill-black"
+                      fill="black"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="none"
+                        stroke-linejoin="none"
+                        d="M12 4v16m8-8H4"
+                      />
+                    </svg>
+                  </label>
+                  <input className="hidden" type="file" id="dokumentasi" />
                 </div>
               </div>
-            </label>
-            <input
-              className="hidden"
-              id="dokumentasi"
-              type="file"
-              onChange={(e) =>
-                e.target.files[0] &&
-                setDokumentasi([...dokumentasi, e.target.files[0]])
-              }
-            />
+            </div>
+
+            <div className="mt-3">
+              <label
+                htmlFor="dokumen"
+                className="flex sm:gap-2 gap-3 items-center"
+              >
+                <div className="sm:w-[10px] sm:h-[10px] w-[6px] h-[6px] bg-[#C4C4C4] rounded-full"></div>
+                <div className="font-Poppins sm:text-base sm:font-medium text-xs font-normal text-struktur">
+                  Dokumen Lainnnya{" "}
+                  <span className="text-[#ff768d]">(jika ada)</span>
+                </div>
+              </label>
+
+              <div className="section-file mt-[6px]">
+                <label className="label-file" htmlFor="dokumen">
+                  Browse...
+                </label>
+                <input
+                  className="input-file"
+                  id="dokumen"
+                  type="file"
+                  onChange={(e) => setDokumenPendukung(e.target.files[0])}
+                />
+                {dokumenPendukung && (
+                  <div className="div w-full ml-3 font-medium font-Poppins text-main-blue">
+                    {dokumenPendukung.name}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="mt-3">
+              <div className="list-content">
+                <label
+                  className="flex sm:gap-2 gap-3 items-center"
+                  htmlFor="linkPendukung"
+                >
+                  <div className="sm:w-[10px] sm:h-[10px] w-[6px] h-[6px] bg-[#C4C4C4] rounded-full"></div>
+                  <div className="font-Poppins sm:text-base sm:font-medium text-xs font-normal text-struktur">
+                    Link Pendukung{" "}
+                    <span className="text-[#ff768d]">(jika ada)</span>
+                  </div>
+                </label>
+                <input
+                  className="grid-cols-12 border border-border-main-color sm:h-10 h-9 pl-[10px] text-main-blue bg-white"
+                  type="text"
+                  id="linkPendukung"
+                  value={laporan.linkPendukung}
+                  onChange={(e) =>
+                    setLaporan({ ...laporan, linkPendukung: e.target.value })
+                  }
+                  required
+                />
+              </div>
+            </div>
           </div>
         </div>
 
