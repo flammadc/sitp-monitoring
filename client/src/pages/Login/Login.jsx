@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import SitpLogo from "../../assets/svg/sitp.svg";
 import Loader from "react-js-loader";
 import { login } from "../../redux/apiCalls";
@@ -22,7 +22,7 @@ const Login = () => {
   return (
     <div className="grid items-center justify-center  w-screen h-screen  font-Poppins">
       <form
-        className="sm:w-[640px] w-screen sm:border border-main-color flex flex-col items-center pt-10 pb-10 sm:shadow-md"
+        className="sm:w-[640px] w-screen sm:border border-main-color flex flex-col items-center pt-10 pb-3 sm:shadow-md"
         onSubmit={handleSubmit}
       >
         <img src={SitpLogo} alt="Sitp Logo" className="w-24 h-12 mb-7" />
@@ -61,8 +61,8 @@ const Login = () => {
           type="submit"
           className={
             isFetching
-              ? `w-1/2 h-12 bg-blue-400 text-white rounded-md my-3 flex items-center justify-center`
-              : `w-1/2 h-12 bg-main-blue text-white rounded-md my-3 flex items-center justify-center`
+              ? `w-1/2 h-12 bg-blue-400 text-white rounded-md mt-3 mb-8 flex items-center justify-center`
+              : `w-1/2 h-12 bg-main-blue text-white rounded-md mt-3 mb-8 flex items-center justify-center`
           }
           disabled={isFetching}
         >
@@ -77,6 +77,12 @@ const Login = () => {
             "Submit"
           )}
         </button>
+        <div className="flex flex-row items-center font-Inter">
+          <p className="text-gray-600">&copy;&nbsp;</p>
+          <Link to="/about" className="text-main-blue hover:underline text-sm">
+            PKL SMKN 2 Jakarta
+          </Link>
+        </div>
       </form>
     </div>
   );
