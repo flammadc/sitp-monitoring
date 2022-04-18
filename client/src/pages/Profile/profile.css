@@ -573,7 +573,8 @@
   justify-content: center;
 }
 
-.white-bg-popup {
+.white-bg-popup,
+.white-bg-popup-pendidikan {
   width: 692px;
   height: 460px;
 
