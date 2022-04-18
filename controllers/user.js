@@ -1,4 +1,5 @@
 const User = require("../models/User.js");
+const bcrypt = require("bcrypt");
 const cloudinary = require("cloudinary").v2;
 const mongoose = require("mongoose");
 
