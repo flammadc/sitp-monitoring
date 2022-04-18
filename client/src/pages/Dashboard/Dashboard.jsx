@@ -78,8 +78,6 @@ const Dashboard = () => {
     }
   }, [activities]);
 
-  console.log(window.innerWidth);
-
   return (
     <div className="bg-white-sec min-h-screen">
       <div className="grid grid-cols-12 bg-white-sec pt-5  pr-6">

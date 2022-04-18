@@ -47,7 +47,6 @@ const EditLaporan = () => {
         data.append("file", dokumen);
         data.append("laporanId", idLaporan);
         res = await userRequest.post("activities/upload", data);
-        console.log(res.data);
         await userRequest.put("activities/" + idLaporan, {
           ...laporan,
           dokumenPendukung: [
