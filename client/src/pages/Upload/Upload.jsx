@@ -146,18 +146,18 @@ const Upload = () => {
               />
             </div>
 
-            <div className="grid sm:grid-cols-6 grid-cols-3 sm:gap-10 gap-y-1 gap-x-14 items-center sm:mt-3 mt-2  sm:ml-[18px] ml-[15px]">
+            <div className="flex flex-wrap sm:gap-10 gap-y-1 gap-x-14 items-center sm:mt-3 mt-2  sm:ml-[18px] ml-[15px]">
               <div className="flex gap-2 items-center">
                 <input
                   className="sm:w-[10px] sm:h-[10px] w-[8px] h-[8px] border-2 border-[#C4C4C4] rounded-none"
                   type="checkbox"
-                  id="psie"
+                  id="kel1"
                 />
                 <label
                   className="font-Poppins sm:text-base text-xs font-medium text-struktur"
-                  htmlFor="psie"
+                  htmlFor="kel1"
                 >
-                  PSIE
+                  Kelompok 1
                 </label>
               </div>
 
@@ -165,13 +165,13 @@ const Upload = () => {
                 <input
                   className="sm:w-[10px] sm:h-[10px] w-[8px] h-[8px] border-2 border-[#C4C4C4] rounded-none"
                   type="checkbox"
-                  id="psii"
+                  id="kel2"
                 />
                 <label
                   className="font-Poppins sm:text-base text-xs font-medium text-struktur"
-                  htmlFor="psii"
+                  htmlFor="kel2"
                 >
-                  PSII
+                  Kelompok 2
                 </label>
               </div>
 
@@ -179,13 +179,13 @@ const Upload = () => {
                 <input
                   className="sm:w-[10px] sm:h-[10px] w-[8px] h-[8px] border-2 border-[#C4C4C4] rounded-none"
                   type="checkbox"
-                  id="pssip"
+                  id="kel3"
                 />
                 <label
                   className="font-Poppins sm:text-base text-xs font-medium text-struktur"
-                  htmlFor="pssip"
+                  htmlFor="kel3"
                 >
-                  PSSIP
+                  Kelompok 3
                 </label>
               </div>
 
@@ -193,13 +193,13 @@ const Upload = () => {
                 <input
                   className="sm:w-[10px] sm:h-[10px] w-[8px] h-[8px] border-2 border-[#C4C4C4] rounded-none"
                   type="checkbox"
-                  id="DDDDDD"
+                  id="kel4"
                 />
                 <label
                   className="font-Poppins sm:text-base text-xs font-medium text-struktur"
-                  htmlFor="DDDDDD"
+                  htmlFor="kel4"
                 >
-                  DDDDDD
+                  Kelompok 4
                 </label>
               </div>
 
@@ -207,13 +207,13 @@ const Upload = () => {
                 <input
                   className="sm:w-[10px] sm:h-[10px] w-[8px] h-[8px] border-2 border-[#C4C4C4] rounded-none"
                   type="checkbox"
-                  id="EEEEEE"
+                  id="kel5"
                 />
                 <label
                   className="font-Poppins sm:text-base text-xs font-medium text-struktur"
-                  htmlFor="EEEEEE"
+                  htmlFor="kel5"
                 >
-                  EEEEEE
+                  Kelompok 5
                 </label>
               </div>
 
@@ -221,13 +221,13 @@ const Upload = () => {
                 <input
                   className="sm:w-[10px] sm:h-[10px] w-[8px] h-[8px] border-2 border-[#C4C4C4] rounded-none"
                   type="checkbox"
-                  id="FFFFFF"
+                  id="kel6"
                 />
                 <label
                   className="font-Poppins sm:text-base text-xs font-medium text-struktur"
-                  htmlFor="FFFFFF"
+                  htmlFor="kel6"
                 >
-                  FFFFFF
+                  Kelompok 6
                 </label>
               </div>
             </div>
