@@ -29,6 +29,13 @@ const activitySchema = new mongoose.Schema(
         url: { type: String },
       },
     ],
+    dokumentasi: [
+      {
+        dokumenId: { type: String },
+        namaDokumen: { type: String },
+        url: { type: String },
+      },
+    ],
     dokumenLainnya: [
       {
         dokumenId: { type: String },
