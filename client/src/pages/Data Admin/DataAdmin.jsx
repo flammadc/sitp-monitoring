@@ -58,8 +58,6 @@ const DataAdmin = () => {
     }
   };
 
-  console.log(filter);
-
   return (
     <div className="grid grid-cols-12 sm:pr-10 sm:pt-10 pr-5 pt-5">
       <div className="col-span-12 grid grid-cols-12 bg-white ml-8 sm:ml-16 pr-5 pl-6 pb-8 pt-7 shadow-md">
@@ -111,12 +109,12 @@ const DataAdmin = () => {
           <div className="table-container overflow-x-auto col-span-12 grid grid-cols-12">
             <table
               cellSpacing={10}
-              cellPadding={10}
+              cellPadding={15}
               className="w-auto font-Mulish col-span-12 whitespace-nowrap"
             >
-              <thead>
-                <tr className="dashboard-heading-tr text-white">
-                  <th className="h-10 ">Pegawai</th>
+              <thead className="">
+                <tr className="h-10 pt-3 pr-14 pb-3 pl-16 text-center lg:text-left bg-thead-color text-white">
+                  <th className="h-10">Pegawai</th>
                   <th className="h-10">Nama Kegiatan</th>
                   <th className="h-10">Tanggal Selesai</th>
                   <th className="h-10">Jenis Kegiatan</th>

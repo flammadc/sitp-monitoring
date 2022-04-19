@@ -11,8 +11,8 @@ module.exports = {
         "white-sec": "#F7F7FC",
         "thead-text": "#5550bd",
         "overlay-color": "rgba(50,50,50,0.3)",
-        "struktur": "rgba(64, 69, 87, 0.7)",
-        "input": "rgba(71, 68, 68, 0.3)",
+        struktur: "rgba(64, 69, 87, 0.7)",
+        input: "rgba(71, 68, 68, 0.3)",
       },
       backgroundImage: {
         "box-tahun":
@@ -41,6 +41,7 @@ module.exports = {
       boxShadow: {
         box: "0px 4px 5px rgba(0, 0, 0, 0.25)",
         chart: "0px 3px 8px rgba(0, 0, 0, 0.25)",
+        "data-th": "inset 0px 1px 0px #b9b9b9",
       },
     },
   },
