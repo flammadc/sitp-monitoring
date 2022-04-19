@@ -4,12 +4,16 @@ import Loader from "react-js-loader";
 import { userRequest } from "../../requestMethods";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
-import avatar from "../../assets/img/avatar.png";
+import { AiOutlineClose } from "react-icons/ai";
 
 const Upload = () => {
   const user = useSelector((state) => state.user.currentUser);
   const [dokumentasi, setDokumentasi] = useState([]);
+  const [internal, setInternal] = useState({
+    jumlah: 0,
+    kelompok: [false, false, false, false, false, false],
+  });
+  const [eksternal, setEksternal] = useState({ nama: "", jumlah: 0 });
   const navigate = useNavigate();
   const [laporan, setLaporan] = useState({
     judul: "",
@@ -17,46 +21,120 @@ const Upload = () => {
     selesai: "",
     jenisKegiatan: "",
     lokasi: "",
+    link: "",
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
+  const [error, setError] = useState({
+    undangan: "",
+    suratTugas: "",
+    daftarHadir: "",
+    dokumenLainnya: "",
+  });
 
-  const [dokumenPendukung, setDokumenPendukung] = useState(null);
+  const [documents, setDocuments] = useState({
+    undangan: undefined,
+    suratTugas: undefined,
+    daftarHadir: undefined,
+    dokumenLainnya: undefined,
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const data = new FormData();
-    if (dokumenPendukung) {
-      if (dokumenPendukung.size >= 5000000) {
-        setError("Ukuran Maximum 5 MB");
-        setLoading(false);
-        return;
-      }
-      if (dokumenPendukung.type !== "application/pdf") {
-        setError("File PDF only");
-        setLoading(false);
-        return;
-      }
-      data.append("name", dokumenPendukung.name);
-      data.append("file", dokumenPendukung);
+    let undangan;
+    let suratTugas;
+    let daftarHadir;
+    let dokumenLainnya;
+    let dokumentasiImages = [];
+
+    if (documents.undangan) {
+      undangan = await uploadFile(
+        documents.undangan.name,
+        documents.undangan,
+        "sitp/undangan"
+      );
     }
-    data.append("id_user", user._id);
-    data.append("judul", laporan.judul);
-    data.append("mulai", laporan.mulai);
-    data.append("selesai", laporan.selesai);
-    data.append("jenisKegiatan", laporan.jenisKegiatan);
-    data.append("lokasi", laporan.lokasi);
+    if (documents.suratTugas) {
+      suratTugas = await uploadFile(
+        documents.suratTugas.name,
+        documents.suratTugas,
+        "sitp/surat_tugas"
+      );
+    }
+    if (documents.daftarHadir) {
+      daftarHadir = await uploadFile(
+        documents.daftarHadir.name,
+        documents.daftarHadir,
+        "sitp/daftar_hadir"
+      );
+    }
+    if (documents.dokumenLainnya) {
+      dokumenLainnya = await uploadFile(
+        documents.dokumenLainnya.name,
+        documents.dokumenLainnya,
+        "sitp/dokumen_lainnya"
+      );
+    }
+
+    if (dokumentasi.length > 0) {
+      for (let dok of dokumentasi) {
+        const res = await uploadFile(dok.name, dok, "sitp/dokumentasi");
+        dokumentasiImages.push(res);
+      }
+    }
+
     try {
-      const res = await userRequest.post("/activities", data);
-      navigate("/data");
+      const res = await userRequest.post("/activities", {
+        id_user: user._id,
+        ...laporan,
+        internal: [{ jumlah: internal.jumlah, kelompok: filterKelompok() }],
+        eksternal: [{ jumlah: eksternal.jumlah, nama: eksternal.nama }],
+        undangan,
+        suratTugas,
+        daftarHadir,
+        dokumenLainnya,
+        dokumentasiImages,
+      });
+      console.log(res.data);
+      // navigate("/data");
       setLoading(false);
     } catch (error) {
       setLoading(false);
       console.log(error);
-      navigate("/data");
+      // navigate("/data");
     }
   };
+
+  const handleGroupChange = (index) => {
+    const updatedCheckedState = internal.kelompok.map((item, i) =>
+      i === index ? !item : item
+    );
+    setInternal({ ...internal, kelompok: updatedCheckedState });
+  };
+
+  const filterKelompok = () => {
+    return internal.kelompok
+      .map((k, i) => k === true && "Kelompok " + (i + 1))
+      .filter((k) => k && k);
+  };
+
+  const handleDeleteDokumentasi = (index) => {
+    setDokumentasi(dokumentasi.filter((d, i) => i !== index));
+  };
+
+  const uploadFile = async (name, file, folder) => {
+    const data = new FormData();
+    data.append("name", name);
+    data.append("file", file);
+    data.append("folder", folder);
+    try {
+      const res = await userRequest.post("activities/upload", data);
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="upload-box">
       <form className="content-upload-box" onSubmit={handleSubmit}>
@@ -141,95 +219,38 @@ const Upload = () => {
               </div>
               <input
                 className="sm:w-[52px] w-[40px] font-Poppins sm:text-sm sm:font-medium text-xs font-normal text-[#474444] text-center border-b border-struktur"
-                placeholder="20"
+                value={internal.jumlah}
+                min={0}
                 type="number"
+                onChange={(e) =>
+                  setInternal({ ...internal, jumlah: parseInt(e.target.value) })
+                }
               />
+              <p className="font-Poppins  sm:text-base sm:font-medium text-sm font-normal text-struktur">
+                peserta
+              </p>
             </div>
 
             <div className="flex flex-wrap sm:gap-10 gap-y-1 gap-x-14 items-center sm:mt-3 mt-2  sm:ml-[18px] ml-[15px]">
-              <div className="flex gap-2 items-center">
-                <input
-                  className="sm:w-[10px] sm:h-[10px] w-[8px] h-[8px] border-2 border-[#C4C4C4] rounded-none"
-                  type="checkbox"
-                  id="kel1"
-                />
-                <label
-                  className="font-Poppins sm:text-base text-xs font-medium text-struktur"
-                  htmlFor="kel1"
-                >
-                  Kelompok 1
-                </label>
-              </div>
-
-              <div className="flex gap-2 items-center">
-                <input
-                  className="sm:w-[10px] sm:h-[10px] w-[8px] h-[8px] border-2 border-[#C4C4C4] rounded-none"
-                  type="checkbox"
-                  id="kel2"
-                />
-                <label
-                  className="font-Poppins sm:text-base text-xs font-medium text-struktur"
-                  htmlFor="kel2"
-                >
-                  Kelompok 2
-                </label>
-              </div>
-
-              <div className="flex gap-2 items-center">
-                <input
-                  className="sm:w-[10px] sm:h-[10px] w-[8px] h-[8px] border-2 border-[#C4C4C4] rounded-none"
-                  type="checkbox"
-                  id="kel3"
-                />
-                <label
-                  className="font-Poppins sm:text-base text-xs font-medium text-struktur"
-                  htmlFor="kel3"
-                >
-                  Kelompok 3
-                </label>
-              </div>
-
-              <div className="flex gap-2 items-center">
-                <input
-                  className="sm:w-[10px] sm:h-[10px] w-[8px] h-[8px] border-2 border-[#C4C4C4] rounded-none"
-                  type="checkbox"
-                  id="kel4"
-                />
-                <label
-                  className="font-Poppins sm:text-base text-xs font-medium text-struktur"
-                  htmlFor="kel4"
-                >
-                  Kelompok 4
-                </label>
-              </div>
-
-              <div className="flex gap-2 items-center">
-                <input
-                  className="sm:w-[10px] sm:h-[10px] w-[8px] h-[8px] border-2 border-[#C4C4C4] rounded-none"
-                  type="checkbox"
-                  id="kel5"
-                />
-                <label
-                  className="font-Poppins sm:text-base text-xs font-medium text-struktur"
-                  htmlFor="kel5"
-                >
-                  Kelompok 5
-                </label>
-              </div>
-
-              <div className="flex gap-2 items-center">
-                <input
-                  className="sm:w-[10px] sm:h-[10px] w-[8px] h-[8px] border-2 border-[#C4C4C4] rounded-none"
-                  type="checkbox"
-                  id="kel6"
-                />
-                <label
-                  className="font-Poppins sm:text-base text-xs font-medium text-struktur"
-                  htmlFor="kel6"
-                >
-                  Kelompok 6
-                </label>
-              </div>
+              {internal.kelompok.map((k, i) => {
+                return (
+                  <div className="flex gap-2 items-center">
+                    <input
+                      className="sm:w-[10px] sm:h-[10px] w-[8px] h-[8px] border-2 border-[#C4C4C4] rounded-none"
+                      type="checkbox"
+                      id={"Kelompok " + (i + 1)}
+                      value={"Kelompok " + (i + 1)}
+                      onChange={() => handleGroupChange(i)}
+                    />
+                    <label
+                      className="font-Poppins sm:text-base text-xs font-medium text-struktur"
+                      htmlFor={"Kelompok " + (i + 1)}
+                    >
+                      {"Kelompok " + (i + 1)}
+                    </label>
+                  </div>
+                );
+              })}
             </div>
           </div>
           <div className="eksternal sm:ml-3">
@@ -240,17 +261,30 @@ const Upload = () => {
               </div>
               <input
                 className="sm:w-[52px] w-[40px] font-Poppins sm:text-sm sm:font-medium text-xs font-normal text-[#474444] text-center border-b border-struktur"
-                placeholder="20"
+                value={eksternal.jumlah}
+                min={0}
                 type="number"
+                onChange={(e) =>
+                  setEksternal({
+                    ...eksternal,
+                    jumlah: parseInt(e.target.value),
+                  })
+                }
               />
+              <p className="font-Poppins  sm:text-base sm:font-medium text-sm font-normal text-struktur">
+                peserta
+              </p>
             </div>
             <div className="flex gap-2 items-center sm:mt-3 mt-[6px] sm:ml-[18px] ml-[15px]">
               <div className="font-Poppins  sm:text-sm text-xs font-medium text-struktur">
                 Nama Kantor :
               </div>
               <input
-                className="w-40 font-Poppins sm:text-sm sm:font-medium text-xs font-normal text-[#474444] text-center border-b border-struktur"
-                placeholder="Lenovo Jakarta"
+                className="w-40 font-Poppins sm:text-sm sm:font-medium text-xs font-normal pl-2 text-[#474444] border-b border-struktur"
+                value={eksternal.nama}
+                onChange={(e) =>
+                  setEksternal({ ...eksternal, nama: e.target.value })
+                }
                 type="text"
               />
             </div>
@@ -266,6 +300,8 @@ const Upload = () => {
             <input
               placeholder="Total Peserta"
               type="text"
+              value={internal.jumlah + eksternal.jumlah}
+              disabled
               className="w-[168px] h-[30px] text-center sm:mt-4 mt-2 sm:ml-[18px] border rounded-sm bg-[#F7F7FC] border-[#DCDBDB] font-Poppins sm:text-sm sm:font-medium text-xs font-normal text-struktur"
             />
           </div>
@@ -273,7 +309,7 @@ const Upload = () => {
 
         <div className="flex flex-col">
           <h1 className="font-Poppins text-sm font-semibold text-font-sec sm:text-lg sm:font-medium">
-            Tambahkan File
+            Tambahkan File ( Pdf For Documents )
           </h1>
           <div className="sm:ml-3 mt-3 sm:mt-6">
             <div className="">
@@ -294,11 +330,16 @@ const Upload = () => {
                   className="input-file"
                   id="undangan"
                   type="file"
-                  onChange={(e) => setDokumenPendukung(e.target.files[0])}
+                  onChange={(e) =>
+                    setDocuments({
+                      ...documents,
+                      undangan: e.target.files[0],
+                    })
+                  }
                 />
-                {dokumenPendukung && (
+                {documents?.undangan && (
                   <div className="div w-full ml-3 font-medium font-Poppins text-main-blue">
-                    {dokumenPendukung.name}
+                    {documents.undangan.name}
                   </div>
                 )}
               </div>
@@ -322,11 +363,16 @@ const Upload = () => {
                   className="input-file"
                   id="tugas"
                   type="file"
-                  onChange={(e) => setDokumenPendukung(e.target.files[0])}
+                  onChange={(e) =>
+                    setDocuments({
+                      ...documents,
+                      suratTugas: e.target.files[0],
+                    })
+                  }
                 />
-                {dokumenPendukung && (
+                {documents?.suratTugas && (
                   <div className="div w-full ml-3 font-medium font-Poppins text-main-blue">
-                    {dokumenPendukung.name}
+                    {documents.suratTugas.name}
                   </div>
                 )}
               </div>
@@ -350,11 +396,16 @@ const Upload = () => {
                   className="input-file"
                   id="kehadiran"
                   type="file"
-                  onChange={(e) => setDokumenPendukung(e.target.files[0])}
+                  onChange={(e) =>
+                    setDocuments({
+                      ...documents,
+                      daftarHadir: e.target.files[0],
+                    })
+                  }
                 />
-                {dokumenPendukung && (
+                {documents?.daftarHadir && (
                   <div className="div w-full ml-3 font-medium font-Poppins text-main-blue">
-                    {dokumenPendukung.name}
+                    {documents.daftarHadir.name}
                   </div>
                 )}
               </div>
@@ -370,13 +421,27 @@ const Upload = () => {
                   Dokumentasi
                 </div>
               </label>
-              <div className="flex gap-4 sm:gap-6">
+              <div className="flex gap-4 sm:gap-6 flex-wrap">
+                {dokumentasi?.length > 0 &&
+                  dokumentasi.map((d, i) => {
+                    return (
+                      <div className="relative dokumentasi-img-container">
+                        <img
+                          src={URL.createObjectURL(d)}
+                          className="sm:w-[100px] sm:h-[100px] w-[60px] h-[60px] border object-cover"
+                        />
+                        <span className="dokumentasi-img-hover sm:w-[100px] sm:h-[100px] w-[60px] h-[60px] absolute bg-overlay-color inset-0 items-center justify-center hidden">
+                          <AiOutlineClose
+                            className="text-4xl text-gray-300 hover:cursor-pointer hover:text-white"
+                            onClick={() => handleDeleteDokumentasi(i)}
+                          />
+                        </span>
+                      </div>
+                    );
+                  })}
+
                 <div className="sm:w-[100px] sm:h-[100px] w-[60px] h-[60px] mt-[6px] border bg-white flex items-center justify-center ">
-                  <img src={avatar} alt="" />
-                  <input className="hidden" type="file" id="dokumentasi" />
-                </div>
-                <div className="sm:w-[100px] sm:h-[100px] w-[60px] h-[60px] mt-[6px] border bg-white flex items-center justify-center ">
-                  <label htmlFor="dokumentasi">
+                  <label htmlFor="dokumentasi" className="hover:cursor-pointer">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       class="sm:h-[50px] sm:w-[50px] w-[20px] h-[20px] fill-black"
@@ -392,7 +457,14 @@ const Upload = () => {
                       />
                     </svg>
                   </label>
-                  <input className="hidden" type="file" id="dokumentasi" />
+                  <input
+                    className="hidden"
+                    type="file"
+                    id="dokumentasi"
+                    onChange={(e) =>
+                      setDokumentasi([...dokumentasi, e.target.files[0]])
+                    }
+                  />
                 </div>
               </div>
             </div>
@@ -417,11 +489,16 @@ const Upload = () => {
                   className="input-file"
                   id="dokumen"
                   type="file"
-                  onChange={(e) => setDokumenPendukung(e.target.files[0])}
+                  onChange={(e) =>
+                    setDocuments({
+                      ...documents,
+                      dokumenLainnya: e.target.files[0],
+                    })
+                  }
                 />
-                {dokumenPendukung && (
+                {documents?.dokumenLainnya && (
                   <div className="div w-full ml-3 font-medium font-Poppins text-main-blue">
-                    {dokumenPendukung.name}
+                    {documents.dokumenLainnya.name}
                   </div>
                 )}
               </div>
@@ -443,11 +520,10 @@ const Upload = () => {
                   className="grid-cols-12 border border-border-main-color sm:h-10 h-9 pl-[10px] text-main-blue bg-white"
                   type="text"
                   id="linkPendukung"
-                  value={laporan.linkPendukung}
+                  value={laporan.link}
                   onChange={(e) =>
-                    setLaporan({ ...laporan, linkPendukung: e.target.value })
+                    setLaporan({ ...laporan, link: e.target.value })
                   }
-                  required
                 />
               </div>
             </div>

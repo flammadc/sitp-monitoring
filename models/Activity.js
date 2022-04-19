@@ -8,13 +8,47 @@ const activitySchema = new mongoose.Schema(
     selesai: Date,
     jenisKegiatan: String,
     lokasi: String,
-    dokumenPendukung: [
+    undangan: [
       {
         dokumenId: { type: String },
         namaDokumen: { type: String },
         url: { type: String },
       },
     ],
+    suratTugas: [
+      {
+        dokumenId: { type: String },
+        namaDokumen: { type: String },
+        url: { type: String },
+      },
+    ],
+    daftarHadir: [
+      {
+        dokumenId: { type: String },
+        namaDokumen: { type: String },
+        url: { type: String },
+      },
+    ],
+    dokumenLainnya: [
+      {
+        dokumenId: { type: String },
+        namaDokumen: { type: String },
+        url: { type: String },
+      },
+    ],
+    internal: [
+      {
+        jumlah: { type: Number },
+        kelompok: [String],
+      },
+    ],
+    eksternal: [
+      {
+        jumlah: { type: Number },
+        nama: String,
+      },
+    ],
+    link: String,
   },
   { timestamps: true }
 );

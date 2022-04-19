@@ -1,6 +1,7 @@
 const Activity = require("../models/Activity.js");
 const cloudinary = require("cloudinary").v2;
 const mongoose = require("mongoose");
+const { cloudinaryUpload } = require("../utils/cloudinary.js");
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -144,27 +145,18 @@ const postActivity = async (req, res) => {
 };
 
 const uploadDocument = async (req, res) => {
-  const activity = await Activity.findById(req.body.laporanId);
   try {
-    if (activity.dokumenPendukung?.length) {
-      cloudinary.uploader.destroy(
-        activity.dokumenPendukung[0]?.dokumenId,
-        (error, result) => {
-          error && res.status(500).json(error);
-        }
-      );
-    }
-    cloudinary.uploader.upload(
+    const { public_id, secure_url, original_filename } = await cloudinaryUpload(
       req.file.path,
-      { folder: "sitp/dokumen_pendukung" },
-      (error, result) => {
-        if (error) res.status(500).json(error);
-        else
-          res
-            .status(200)
-            .json({ dokumenId: result.public_id, url: result.secure_url });
-      }
+      req.body.folder
     );
+    res
+      .status(200)
+      .json({
+        dokumenId: public_id,
+        url: secure_url,
+        namaDokumen: req.body.name,
+      });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -173,12 +165,12 @@ const uploadDocument = async (req, res) => {
 const deleteActivity = async (req, res) => {
   try {
     const deletedActivity = await Activity.findByIdAndRemove(req.params.id);
-    if (deletedActivity.dokumenPendukung?.length) {
-      cloudinary.uploader.destroy(
-        deletedActivity.dokumenPendukung[0].dokumenId,
-        (error, result) => [error && res.status(500).json(error)]
-      );
-    }
+    // if (deletedActivity.dokumenPendukung?.length) {
+    //   cloudinary.uploader.destroy(
+    //     deletedActivity.dokumenPendukung[0].dokumenId,
+    //     (error, result) => [error && res.status(500).json(error)]
+    //   );
+    // }
     res.status(200).json(`Kegiatan ${deletedActivity.judul} Berhasil Dihapus`);
   } catch (error) {
     res.status(500).json({ message: error.message });

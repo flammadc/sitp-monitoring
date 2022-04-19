@@ -303,3 +303,7 @@
 .dokumentasi-image:hover .delete-dokumentasi-icon {
   display: block;
 }
+
+.dokumentasi-img-container:hover .dokumentasi-img-hover {
+  display: flex;
+}
