@@ -3,7 +3,7 @@ import "./upload.css";
 import Loader from "react-js-loader";
 import { userRequest } from "../../requestMethods";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
 
 const Upload = () => {
@@ -24,12 +24,6 @@ const Upload = () => {
     link: "",
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState({
-    undangan: "",
-    suratTugas: "",
-    daftarHadir: "",
-    dokumenLainnya: "",
-  });
 
   const [documents, setDocuments] = useState({
     undangan: undefined,
@@ -81,6 +75,7 @@ const Upload = () => {
         const res = await uploadFile(dok.name, dok, "sitp/dokumentasi");
         dokumentasiImages.push(res);
       }
+      console.log(dokumentasiImages);
     }
 
     try {
@@ -93,15 +88,13 @@ const Upload = () => {
         suratTugas,
         daftarHadir,
         dokumenLainnya,
-        dokumentasiImages,
+        dokumentasi: dokumentasiImages,
       });
-      console.log(res.data);
-      // navigate("/data");
+      navigate("/data/detail/" + res.data._id);
       setLoading(false);
     } catch (error) {
       setLoading(false);
       console.log(error);
-      // navigate("/data");
     }
   };
 
@@ -133,6 +126,29 @@ const Upload = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleClearData = () => {
+    setLaporan({
+      judul: "",
+      mulai: "",
+      selesai: "",
+      jenisKegiatan: "",
+      lokasi: "",
+      link: "",
+    });
+    setDocuments({
+      undangan: undefined,
+      suratTugas: undefined,
+      daftarHadir: undefined,
+      dokumenLainnya: undefined,
+    });
+    setDokumentasi([]);
+    setInternal({
+      jumlah: 0,
+      kelompok: [false, false, false, false, false, false],
+    });
+    setEksternal({ nama: "", jumlah: 0 });
   };
 
   return (
@@ -513,7 +529,9 @@ const Upload = () => {
                   <div className="sm:w-[10px] sm:h-[10px] w-[6px] h-[6px] bg-[#C4C4C4] rounded-full"></div>
                   <div className="font-Poppins sm:text-base sm:font-medium text-xs font-normal text-struktur">
                     Link Pendukung{" "}
-                    <span className="text-[#ff768d]">(jika ada)</span>
+                    <span className="text-[#ff768d]">
+                      (jika ada menggunakan https)
+                    </span>
                   </div>
                 </label>
                 <input
@@ -529,27 +547,38 @@ const Upload = () => {
             </div>
           </div>
         </div>
-
-        <button
-          className={
-            loading
-              ? "upload-button upload-anchor bg-[#57a6f5] cursor-not-allowed"
-              : "upload-button upload-anchor bg-[#0d8bff]"
-          }
-          type="submit"
-          disabled={loading}
-        >
-          {loading ? (
-            <Loader
-              type="spinner-default"
-              bgColor={"#FFFFFF"}
-              color={"#FFFFFF"}
-              size={40}
-            />
-          ) : (
-            <>Upload</>
-          )}
-        </button>
+        <div className="flex flex-row items-center justify-between">
+          <Link to="/data" className="text-blue-400">
+            &laquo; Kembali ke data
+          </Link>
+          <button
+            className={
+              loading
+                ? "upload-button upload-anchor bg-[#57a6f5] cursor-not-allowed"
+                : "upload-button upload-anchor bg-[#0d8bff]"
+            }
+            type="submit"
+            disabled={loading}
+          >
+            {loading ? (
+              <Loader
+                type="spinner-default"
+                bgColor={"#FFFFFF"}
+                color={"#FFFFFF"}
+                size={40}
+              />
+            ) : (
+              <>Upload</>
+            )}
+          </button>
+          <button
+            className="upload-button upload-anchor bg-red-400 "
+            type="reset"
+            onClick={handleClearData}
+          >
+            Clear Data
+          </button>
+        </div>
       </form>
     </div>
   );
