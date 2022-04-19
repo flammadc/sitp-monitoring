@@ -90,7 +90,7 @@ const Upload = () => {
         dokumenLainnya,
         dokumentasi: dokumentasiImages,
       });
-      navigate("/data/detail/" + res.data._id);
+      navigate("/data/detail/" + res.data._id, { state: true });
       setLoading(false);
     } catch (error) {
       setLoading(false);

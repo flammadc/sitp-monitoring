@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import moment from "moment";
 import Loader from "react-js-loader";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { userRequest } from "../../requestMethods";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { AiOutlineClose } from "react-icons/ai";
 import "./detail_laporan.css";
-import { MdEdit } from "react-icons/md";
 
 const DetailLaporan = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { state } = useLocation();
+  const [close, setClose] = useState(state);
   const [loading, setLoading] = useState();
   const [laporan, setLaporan] = useState({
     judul: "",
@@ -53,7 +55,7 @@ const DetailLaporan = () => {
   const handleDeleteLaporan = async () => {
     try {
       await userRequest.delete("activities/" + idLaporan);
-      navigate("/data");
+      navigate("/data", { state: true });
     } catch (error) {
       console.log(error);
     }
@@ -61,6 +63,22 @@ const DetailLaporan = () => {
 
   return (
     <div class="detail-box">
+      <motion.div
+        animate={
+          close
+            ? { height: "3rem", opacity: 1 }
+            : { height: "0rem", opacity: 0 }
+        }
+        transition={{ duration: 0.5 }}
+        className="col-span-12 h-0 mb-5 bg-[#5DE0A9] flex flex-row items-center px-5"
+      >
+        <h2 className="text-white">Laporan Berhasil Dibuat</h2>
+
+        <AiOutlineClose
+          className="ml-auto text-white hover:cursor-pointer"
+          onClick={() => setClose(false)}
+        />
+      </motion.div>
       <div class="top-detail-box">
         <h1 class="header-detail-box">Detail Laporan</h1>
         <div class="flex flex-row">

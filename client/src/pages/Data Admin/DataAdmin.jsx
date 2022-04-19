@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 import { userRequest } from "../../requestMethods";
 import { VscNewFile } from "react-icons/vsc";
 import Loader from "react-js-loader";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import DataTable from "./DataTable";
+import { AiOutlineClose } from "react-icons/ai";
 
 import "./data_admin.css";
 
 const DataAdmin = () => {
   const user = useSelector((state) => state.user.currentUser);
+  const { state } = useLocation();
+  const [close, setClose] = useState(state);
   const [searchMode, setSearchMode] = useState(false);
   const thisMonth = new Date(Date.now()).getMonth() + 1;
   const [filter, setFilter] = useState("tahun");
@@ -61,6 +66,21 @@ const DataAdmin = () => {
   return (
     <div className="grid grid-cols-12 sm:pr-10 sm:pt-10 pr-5 pt-5">
       <div className="col-span-12 grid grid-cols-12 bg-white ml-8 sm:ml-16 pr-5 pl-6 pb-8 pt-7 shadow-md">
+        <motion.div
+          animate={
+            close
+              ? { height: "3rem", opacity: 1 }
+              : { height: "0rem", opacity: 0 }
+          }
+          transition={{ duration: 0.5 }}
+          className="col-span-12 h-0 mb-5 bg-red-400 flex flex-row items-center px-5"
+        >
+          <h2 className="text-white">Data Berhasil Dihapus</h2>
+          <AiOutlineClose
+            className="ml-auto text-white hover:cursor-pointer"
+            onClick={() => setClose(false)}
+          />
+        </motion.div>
         <div className="sm:mb-7 mb-3 col-span-12 grid grid-cols-12 ">
           <div className="col-span-12 sm:col-span-7 flex flex-col sm:flex-row items-center mb-3 sm:mb-0">
             <h1 className="header-semua-box sm:text-left text-center sm:col-span-3 col-span-12 mb-3 sm:mb-0 mr-5">
