@@ -238,7 +238,7 @@ const DetailLaporan = () => {
 
             <div className="flex flex-col">
               <h1 className="font-Poppins text-sm font-semibold text-font-sec sm:text-lg sm:font-medium">
-                Tambahkan File ( Pdf For Documents )
+                Dokumen
               </h1>
               <div className="sm:ml-3 mt-3 sm:mt-6">
                 <div className="">
@@ -338,29 +338,6 @@ const DetailLaporan = () => {
                           </div>
                         );
                       })}
-
-                    <div className="sm:w-[100px] sm:h-[100px] w-[60px] h-[60px] mt-[6px] border bg-white flex items-center justify-center ">
-                      <label
-                        htmlFor="dokumentasi"
-                        className="hover:cursor-pointer"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="sm:h-[50px] sm:w-[50px] w-[20px] h-[20px] fill-black"
-                          fill="black"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          stroke-width="2"
-                        >
-                          <path
-                            stroke-linecap="none"
-                            stroke-linejoin="none"
-                            d="M12 4v16m8-8H4"
-                          />
-                        </svg>
-                      </label>
-                      <input className="hidden" type="file" id="dokumentasi" />
-                    </div>
                   </div>
                 </div>
 
