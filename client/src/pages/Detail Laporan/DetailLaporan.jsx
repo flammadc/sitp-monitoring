@@ -2,16 +2,18 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import moment from "moment";
 import Loader from "react-js-loader";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { userRequest } from "../../requestMethods";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { AiOutlineClose } from "react-icons/ai";
 import "./detail_laporan.css";
+import ModalDelete from "../../components/Modal Delete/ModalDelete";
 
 const DetailLaporan = () => {
   const location = useLocation();
-  const navigate = useNavigate();
+
   const { state } = useLocation();
+  const [modalDelete, setModalDelete] = useState(false);
   const [close, setClose] = useState(state);
   const [loading, setLoading] = useState();
   const [laporan, setLaporan] = useState({
@@ -52,15 +54,6 @@ const DetailLaporan = () => {
     setAutoFocus(true);
   }, [editMode]);
 
-  const handleDeleteLaporan = async () => {
-    try {
-      await userRequest.delete("activities/" + idLaporan);
-      navigate("/data", { state: true });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <div class="detail-box">
       <motion.div
@@ -84,7 +77,7 @@ const DetailLaporan = () => {
         <div class="flex flex-row">
           <RiDeleteBin6Line
             className="text-3xl text-red-400 cursor-pointer hover:text-red-600"
-            onClick={handleDeleteLaporan}
+            onClick={() => setModalDelete(true)}
           />
         </div>
       </div>
@@ -415,6 +408,9 @@ const DetailLaporan = () => {
             <button class="btn-detail-box">Kembali</button>
           </Link>
         </>
+      )}
+      {modalDelete && (
+        <ModalDelete setModalDelete={setModalDelete} idLaporan={idLaporan} />
       )}
     </div>
   );
