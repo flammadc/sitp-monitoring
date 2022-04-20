@@ -26,6 +26,7 @@ const Pegawai = () => {
   const [alert, setAlert] = useState({
     created: false,
     removed: false,
+    updated: false,
   });
   const [loading, setLoading] = useState();
   const [modal, setModal] = useState({
@@ -88,14 +89,16 @@ const Pegawai = () => {
         <div className="col-span-12 bg-white grid grid-cols-12 pl-10 pr-10 py-10 shadow-md whitespace-nowrap">
           <motion.div
             animate={
-              alert.created
+              alert.created || alert.updated
                 ? { height: "3rem", opacity: 1 }
                 : { height: "0rem", opacity: 0 }
             }
             transition={{ duration: 0.5 }}
             className="col-span-12 h-0 mb-5 bg-[#5DE0A9] flex flex-row items-center px-5"
           >
-            <h2 className="text-white">Pegawai Berhasil Dibuat</h2>
+            <h2 className="text-white">
+              Pegawai Berhasil {alert.created ? "Dibuat" : "Diubah"}
+            </h2>
 
             <AiOutlineClose
               className="ml-auto text-white hover:cursor-pointer"
@@ -212,11 +215,7 @@ const Pegawai = () => {
         </div>
       </div>
       {modal.tambah && (
-        <AddPegawai
-          setModal={setModal}
-          setRender={setRender}
-          render={setRender}
-        />
+        <AddPegawai setModal={setModal} setRender={setRender} render={render} />
       )}
       {modal.ubah?.show && (
         <EditPegawai
