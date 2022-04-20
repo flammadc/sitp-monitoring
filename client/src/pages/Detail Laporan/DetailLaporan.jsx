@@ -5,6 +5,7 @@ import Loader from "react-js-loader";
 import { Link, useLocation } from "react-router-dom";
 import { userRequest } from "../../requestMethods";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { FiEdit2 } from "react-icons/fi";
 import { AiOutlineClose } from "react-icons/ai";
 import "./detail_laporan.css";
 import ModalDelete from "../../components/Modal Delete/ModalDelete";
@@ -65,7 +66,9 @@ const DetailLaporan = () => {
         transition={{ duration: 0.5 }}
         className="col-span-12 h-0 mb-5 bg-[#5DE0A9] flex flex-row items-center px-5"
       >
-        <h2 className="text-white">Laporan Berhasil Dibuat</h2>
+        <h2 className="text-white">
+          Laporan Berhasil {state?.created ? "Dibuat" : "Diubah"}
+        </h2>
 
         <AiOutlineClose
           className="ml-auto text-white hover:cursor-pointer"
@@ -74,9 +77,12 @@ const DetailLaporan = () => {
       </motion.div>
       <div class="top-detail-box">
         <h1 class="header-detail-box">Detail Laporan</h1>
-        <div class="flex flex-row">
+        <div class="flex flex-row items-center">
+          <Link to={"/data/edit/" + idLaporan}>
+            <FiEdit2 className="text-2xl text-struktur cursor-pointer hover:text-black" />
+          </Link>
           <RiDeleteBin6Line
-            className="text-3xl text-red-400 cursor-pointer hover:text-red-600"
+            className="text-3xl ml-2 text-red-400 cursor-pointer hover:text-red-600"
             onClick={() => setModalDelete(true)}
           />
         </div>
@@ -180,20 +186,22 @@ const DetailLaporan = () => {
 
                 <div className="flex flex-wrap sm:gap-10 gap-y-1 gap-x-14 items-center sm:mt-3 mt-2  sm:ml-[18px] ml-[15px]">
                   {laporan.internal[0]?.kelompok.length &&
-                    laporan.internal[0].kelompok.map((k, i) => {
-                      return (
-                        <div className="flex gap-2 items-center">
-                          <input
-                            className="sm:w-[10px] sm:h-[10px] w-[8px] h-[8px] border-2 border-[#C4C4C4] rounded-none"
-                            type="checkbox"
-                            checked
-                          />
-                          <label className="font-Poppins sm:text-base text-xs font-medium text-struktur">
-                            {k}
-                          </label>
-                        </div>
-                      );
-                    })}
+                    laporan.internal[0].kelompok
+                      .filter((k) => k !== "false")
+                      .map((k, i) => {
+                        return (
+                          <div className="flex gap-2 items-center">
+                            <input
+                              className="sm:w-[10px] sm:h-[10px] w-[8px] h-[8px] border-2 border-[#C4C4C4] rounded-none"
+                              type="checkbox"
+                              checked
+                            />
+                            <label className="font-Poppins sm:text-base text-xs font-medium text-struktur">
+                              {k}
+                            </label>
+                          </div>
+                        );
+                      })}
                 </div>
               </div>
               <div className="eksternal sm:ml-3">
@@ -251,7 +259,7 @@ const DetailLaporan = () => {
               <h1 className="font-Poppins text-sm font-semibold text-font-sec sm:text-lg sm:font-medium">
                 Dokumen
               </h1>
-              <div className="sm:ml-3 mt-3 sm:mt-6">
+              <div className="sm:ml-3 mt-2 sm:mt-6">
                 <div className="">
                   <label
                     htmlFor="undangan"
@@ -338,7 +346,7 @@ const DetailLaporan = () => {
                     </div>
                   </label>
                   <div className="flex gap-4 sm:gap-6 flex-wrap">
-                    {laporan.dokumentasi?.length > 0 &&
+                    {laporan.dokumentasi?.length > 0 ? (
                       laporan.dokumentasi.map((d, i) => {
                         return (
                           <div className="relative dokumentasi-img-container">
@@ -348,7 +356,14 @@ const DetailLaporan = () => {
                             />
                           </div>
                         );
-                      })}
+                      })
+                    ) : (
+                      <div className="section-file mt-[6px] pl-5 w-full">
+                        <h3 className="text-gray-500 font-medium">
+                          Tidak Ada Dokumentasi
+                        </h3>
+                      </div>
+                    )}
                   </div>
                 </div>
 

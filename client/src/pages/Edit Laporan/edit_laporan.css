@@ -1,0 +1,8 @@
+.undangan-label:hover .undangan-edit-icon,
+.suratTugas-label:hover .suratTugas-edit-icon,
+.daftarHadir-label:hover .daftarHadir-edit-icon,
+.dokumentasi-label:hover .dokumentasi-edit-icon,
+.dokumenLainnya-label:hover .dokumenLainnya-edit-icon,
+.link-label:hover .link-edit-icon {
+  display: block;
+}
