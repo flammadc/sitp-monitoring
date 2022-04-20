@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Loader from "react-js-loader";
-import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import { userRequest } from "../../requestMethods";
 import { CgProfile } from "react-icons/cg";
 import { MdEdit } from "react-icons/md";
@@ -22,6 +21,7 @@ import DeleteModal from "../../components/Modal Pegawai/DeleteModal";
 
 const Pegawai = () => {
   const user = useSelector((state) => state.user.currentUser);
+  const [render, setRender] = useState(false);
   const { state } = useLocation();
   const [alert, setAlert] = useState({
     created: false,
@@ -33,7 +33,7 @@ const Pegawai = () => {
     ubah: { show: false, id: undefined },
     hapus: { show: false, id: undefined },
   });
-  const [hapus, setHapus] = useState(false);
+
   const [keyword, setKeyword] = useState("");
   const [allPegawai, setAllPegawai] = useState();
 
@@ -51,7 +51,7 @@ const Pegawai = () => {
       }
     };
     getAllPegawai();
-  }, [user._id, modal]);
+  }, [user._id, render]);
 
   const handlePegawaiSearch = (e) => {
     e.preventDefault();
@@ -79,19 +79,8 @@ const Pegawai = () => {
   };
 
   useEffect(() => {
-    if (modal.tambah || modal.ubah?.show) {
-      disableBodyScroll(document);
-    } else {
-      enableBodyScroll(document);
-    }
-  }, [modal]);
-
-  useEffect(() => {
     setAlert({ ...state });
   }, [state]);
-
-  console.log(state?.removed);
-  console.log(alert?.removed);
 
   return (
     <div className="grid grid-cols-12 font-Lato col-span-12 pt-5">
@@ -222,12 +211,28 @@ const Pegawai = () => {
           </div>
         </div>
       </div>
-      {modal.tambah && <AddPegawai setModal={setModal} />}
+      {modal.tambah && (
+        <AddPegawai
+          setModal={setModal}
+          setRender={setRender}
+          render={setRender}
+        />
+      )}
       {modal.ubah?.show && (
-        <EditPegawai setModal={setModal} id={modal.ubah.id} />
+        <EditPegawai
+          setModal={setModal}
+          id={modal.ubah.id}
+          setRender={setRender}
+          render={render}
+        />
       )}
       {modal.hapus?.show && (
-        <DeleteModal idPegawai={modal.hapus.id} setModal={setModal} />
+        <DeleteModal
+          idPegawai={modal.hapus.id}
+          setModal={setModal}
+          setRender={setRender}
+          render={render}
+        />
       )}
     </div>
   );

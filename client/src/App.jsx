@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Cookies from "universal-cookie";
@@ -23,14 +22,6 @@ function App() {
   const [sidebar, setSidebar] = useState(false);
   const dispatch = useDispatch();
   // const currentUser = false;
-
-  useEffect(() => {
-    if (modal) {
-      disableBodyScroll(document);
-    } else {
-      enableBodyScroll(document);
-    }
-  }, [modal]);
 
   useEffect(() => {
     !cookies?.get("access_token") && dispatch(logout());

@@ -56,22 +56,6 @@ const Profile = () => {
   });
 
   useEffect(() => {
-    if (
-      modal.dataDiri ||
-      modal.dataAkun ||
-      modal.pengalaman ||
-      modal.pendidikan ||
-      modal.profilePic ||
-      modal.hapusPendidikan ||
-      modal.hapusPengalaman
-    ) {
-      disableBodyScroll(document);
-    } else {
-      enableBodyScroll(document);
-    }
-  }, [modal]);
-
-  useEffect(() => {
     const getUser = async () => {
       try {
         const res = await userRequest("users/" + user._id);

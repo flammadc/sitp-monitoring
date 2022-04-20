@@ -3,7 +3,7 @@ import Loader from "react-js-loader";
 import { useNavigate } from "react-router-dom";
 import { userRequest } from "../../requestMethods";
 
-const AddPegawai = ({ setModal }) => {
+const AddPegawai = ({ setModal, setRender, render }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -21,8 +21,9 @@ const AddPegawai = ({ setModal }) => {
       await userRequest.post("auth/register", pegawai);
       setLoading(false);
       setModal({ tambah: false });
+      setRender(!render);
       navigate("/pegawai", {
-        state: { created: true, removed: false },
+        state: { created: true, removed: false, updated: false },
       });
     } catch (error) {
       setLoading(false);
@@ -32,7 +33,7 @@ const AddPegawai = ({ setModal }) => {
 
   return (
     <div className="black-bg" id="modal-ubah-data">
-      <div className="white-bg-popup">
+      <div className="white-bg-popup-pendidikan">
         <h1 className="header-popup">Tambah Pegawai</h1>
         <hr className="hr-popup" />
 
@@ -110,7 +111,7 @@ const AddPegawai = ({ setModal }) => {
               <select
                 name=""
                 id=""
-                className="ml-2 w-56 bg-white shadow-md border border-border-main-color"
+                className="ml-2 w-full bg-white shadow-md border border-border-main-color"
                 onChange={(e) =>
                   setPegawai({ ...pegawai, isAdmin: e.target.value })
                 }

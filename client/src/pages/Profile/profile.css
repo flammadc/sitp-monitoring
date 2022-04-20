@@ -883,9 +883,9 @@
 
   .white-bg-popup-pendidikan {
     display: flex;
-    height: 350px;
+    min-height: 350px;
     width: 388px;
-
+    max-height: max-content;
     border-radius: 8px;
 
     background: #ffffff;
