@@ -18,9 +18,12 @@ const AddPegawai = ({ setModal }) => {
   const handleTambahPegawai = async () => {
     setLoading(true);
     try {
-      const res = await userRequest.post("auth/register", pegawai);
+      await userRequest.post("auth/register", pegawai);
       setLoading(false);
       setModal({ tambah: false });
+      navigate("/pegawai", {
+        state: { created: true, removed: false },
+      });
     } catch (error) {
       setLoading(false);
       setError(error.response.data.message);

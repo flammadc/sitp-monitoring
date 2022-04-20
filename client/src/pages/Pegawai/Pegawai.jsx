@@ -5,21 +5,33 @@ import { userRequest } from "../../requestMethods";
 import { CgProfile } from "react-icons/cg";
 import { MdEdit } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { AiOutlineUserAdd, AiOutlineSearch } from "react-icons/ai";
+import {
+  AiOutlineUserAdd,
+  AiOutlineSearch,
+  AiOutlineClose,
+} from "react-icons/ai";
 import { BsChevronRight } from "react-icons/bs";
 
 import "./pegawai.css";
 import { useSelector } from "react-redux";
 import AddPegawai from "../../components/Modal Pegawai/AddPegawai";
 import EditPegawai from "../../components/Modal Pegawai/EditPegawai";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
+import DeleteModal from "../../components/Modal Pegawai/DeleteModal";
 
 const Pegawai = () => {
   const user = useSelector((state) => state.user.currentUser);
+  const { state } = useLocation();
+  const [alert, setAlert] = useState({
+    created: false,
+    removed: false,
+  });
   const [loading, setLoading] = useState();
   const [modal, setModal] = useState({
     tambah: false,
     ubah: { show: false, id: undefined },
+    hapus: { show: false, id: undefined },
   });
   const [hapus, setHapus] = useState(false);
   const [keyword, setKeyword] = useState("");
@@ -39,7 +51,7 @@ const Pegawai = () => {
       }
     };
     getAllPegawai();
-  }, [user._id, modal, hapus]);
+  }, [user._id, modal]);
 
   const handlePegawaiSearch = (e) => {
     e.preventDefault();
@@ -66,17 +78,6 @@ const Pegawai = () => {
     getAllPegawai();
   };
 
-  const handleHapusPegawai = async (pegawai) => {
-    setHapus(true);
-    try {
-      await userRequest.delete("users/" + pegawai._id);
-      setHapus(false);
-    } catch (error) {
-      console.log(error.response.data.message);
-      setHapus(false);
-    }
-  };
-
   useEffect(() => {
     if (modal.tambah || modal.ubah?.show) {
       disableBodyScroll(document);
@@ -85,10 +86,49 @@ const Pegawai = () => {
     }
   }, [modal]);
 
+  useEffect(() => {
+    setAlert({ ...state });
+  }, [state]);
+
+  console.log(state?.removed);
+  console.log(alert?.removed);
+
   return (
     <div className="grid grid-cols-12 font-Lato col-span-12 pt-5">
       <div className="col-span-12 grid grid-cols-12 pr-3 ml-4">
         <div className="col-span-12 bg-white grid grid-cols-12 pl-10 pr-10 py-10 shadow-md whitespace-nowrap">
+          <motion.div
+            animate={
+              alert.created
+                ? { height: "3rem", opacity: 1 }
+                : { height: "0rem", opacity: 0 }
+            }
+            transition={{ duration: 0.5 }}
+            className="col-span-12 h-0 mb-5 bg-[#5DE0A9] flex flex-row items-center px-5"
+          >
+            <h2 className="text-white">Pegawai Berhasil Dibuat</h2>
+
+            <AiOutlineClose
+              className="ml-auto text-white hover:cursor-pointer"
+              onClick={() => setAlert({ created: false })}
+            />
+          </motion.div>
+          <motion.div
+            animate={
+              alert.removed
+                ? { height: "3rem", opacity: 1 }
+                : { height: "0rem", opacity: 0 }
+            }
+            transition={{ duration: 0.5 }}
+            className="col-span-12 h-0 mb-5 bg-red-400 flex flex-row items-center px-5"
+          >
+            <h2 className="text-white">Pegawai Berhasil Dihapus</h2>
+
+            <AiOutlineClose
+              className="ml-auto text-white hover:cursor-pointer"
+              onClick={() => setAlert({ removed: false })}
+            />
+          </motion.div>
           <div className="mb-5 sm:mb-10 flex flex-col sm:flex-row col-span-12">
             <h1 className="text-2xl font-medium font-Mulish col-span-8 mb-5 sm:mb-0">
               Data Pegawai
@@ -158,7 +198,9 @@ const Pegawai = () => {
                             />
                             <RiDeleteBin6Line
                               className="text-red-500 cursor-pointer hover:text-red-700"
-                              onClick={() => handleHapusPegawai(p)}
+                              onClick={() =>
+                                setModal({ hapus: { show: true, id: p._id } })
+                              }
                             />
                           </div>
                         </td>
@@ -183,6 +225,9 @@ const Pegawai = () => {
       {modal.tambah && <AddPegawai setModal={setModal} />}
       {modal.ubah?.show && (
         <EditPegawai setModal={setModal} id={modal.ubah.id} />
+      )}
+      {modal.hapus?.show && (
+        <DeleteModal idPegawai={modal.hapus.id} setModal={setModal} />
       )}
     </div>
   );
