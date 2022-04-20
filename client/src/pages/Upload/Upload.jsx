@@ -90,7 +90,7 @@ const Upload = () => {
         dokumentasi: dokumentasiImages,
       });
       navigate("/data/detail/" + res.data._id, {
-        state: { updated: true, created: false },
+        state: { updated: false, created: true },
       });
       setLoading(false);
     } catch (error) {
