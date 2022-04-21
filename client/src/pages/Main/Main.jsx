@@ -35,12 +35,13 @@ const Main = () => {
     return () => {
       document.removeEventListener("mousedown", Clickout);
     };
-  }, []);
+  }, [width < 1024]);
 
   const Clickout = (e) => {
-    if (ref.current && !ref.current.contains(e.target)) {
+    width < 1024 &&
+      ref.current &&
+      !ref.current.contains(e.target) &&
       setSidebar(false);
-    }
   };
 
   return (
