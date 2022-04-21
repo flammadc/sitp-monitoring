@@ -45,7 +45,9 @@ const Topbar = ({ setSidebar, sidebar, width }) => {
               />
             </Link>
           ) : (
-            <CgProfile className="text-4xl" />
+            <Link to="/profile" className="ml-auto sm:ml-0">
+              <CgProfile className="text-4xl" />
+            </Link>
           )}
           <div className="ml-4 text-justify hidden sm:block">
             <Link
