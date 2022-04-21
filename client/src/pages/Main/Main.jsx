@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { useWindowSize } from "@react-hook/window-size";
 import { Route, Routes } from "react-router-dom";
+
+// PAGES OR COMPONENTS
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Topbar from "../../components/Topbar/Topbar";
 import RequireRole from "../../utils/RequireRole";
@@ -18,15 +20,29 @@ import DetailLaporan from "../Detail Laporan/DetailLaporan";
 import EditLaporan from "../Edit Laporan/EditLaporan";
 import RequireAdmin from "../../utils/RequireAdmin";
 import DetailPegawai from "../../components/Detail Pegawai/DetailPegawai";
-import About from "../About/About";
 
 const Main = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
+  const ref = useRef(null);
   const [width, height] = useWindowSize();
   const [sidebar, setSidebar] = useState();
   useEffect(() => {
     width >= 1024 ? setSidebar(true) : setSidebar(false);
   }, [width]);
+
+  useEffect(() => {
+    document.addEventListener("mousedown", Clickout);
+    return () => {
+      document.removeEventListener("mousedown", Clickout);
+    };
+  }, []);
+
+  const Clickout = (e) => {
+    if (ref.current && !ref.current.contains(e.target)) {
+      setSidebar(false);
+    }
+  };
+
   return (
     <div className="grid grid-cols-12 w-full h-full relative">
       <div className="col-span-12">
@@ -36,6 +52,7 @@ const Main = () => {
         className={`sidebar lg:flex flex fixed z-30 top-0  bottom-0 flex-col overflow-y-auto border-r border-border-main-color px-10 py-7  text-font-sec bg-white  font-Poppins `}
         animate={{ left: sidebar ? "0" : "-85%" }}
         transition={{ duration: 0.5, easings: [0.3, 0.3] }}
+        ref={ref}
       >
         <Sidebar sidebar={sidebar} setSidebar={setSidebar} />
       </motion.div>
