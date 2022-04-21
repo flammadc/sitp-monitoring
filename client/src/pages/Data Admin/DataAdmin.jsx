@@ -130,7 +130,7 @@ const DataAdmin = () => {
             <table
               cellSpacing={10}
               cellPadding={15}
-              className="w-auto font-Mulish col-span-12 whitespace-nowrap"
+              className="w-auto font-Mulish col-span-12 whitespace-nowrap overflow-hidden"
             >
               <thead className="">
                 <tr className="h-10 pt-3 pr-14 pb-3 pl-16 text-center lg:text-left bg-thead-color text-white">
