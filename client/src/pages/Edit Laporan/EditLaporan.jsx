@@ -164,6 +164,15 @@ const EditLaporan = () => {
     }
   };
 
+  const handleDeleteLaporanDokumentasi = (index) => {
+    setLaporan({
+      ...laporan,
+      dokumentasi: laporan.dokumentasi.filter((d, i) => i !== index),
+    });
+  };
+
+  console.log(laporan.dokumentasi);
+
   return (
     <form class="detail-box" onSubmit={handleEditLaporan}>
       <div class="top-detail-box">
@@ -573,6 +582,12 @@ const EditLaporan = () => {
                             src={d.url}
                             className="sm:w-[100px] sm:h-[100px] w-[60px] h-[60px] border object-cover"
                           />
+                          <span className="dokumentasi-img-hover sm:w-[100px] sm:h-[100px] w-[60px] h-[60px] absolute bg-overlay-color inset-0 items-center justify-center hidden">
+                            <AiOutlineClose
+                              className="text-4xl text-gray-300 cursor-pointer hover:text-white"
+                              onClick={() => handleDeleteLaporanDokumentasi(i)}
+                            />
+                          </span>
                         </div>
                       );
                     })
