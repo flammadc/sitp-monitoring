@@ -75,7 +75,6 @@ const Upload = () => {
         const res = await uploadFile(dok.name, dok, "sitp/dokumentasi");
         dokumentasiImages.push(res);
       }
-      console.log(dokumentasiImages);
     }
 
     try {
@@ -90,7 +89,9 @@ const Upload = () => {
         dokumenLainnya,
         dokumentasi: dokumentasiImages,
       });
-      navigate("/data/detail/" + res.data._id, { state: true });
+      navigate("/data/detail/" + res.data._id, {
+        state: { updated: false, created: true },
+      });
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -106,9 +107,7 @@ const Upload = () => {
   };
 
   const filterKelompok = () => {
-    return internal.kelompok
-      .map((k, i) => k === true && "Kelompok " + (i + 1))
-      .filter((k) => k && k);
+    return internal.kelompok.map((k, i) => k === true && "Kelompok " + (i + 1));
   };
 
   const handleDeleteDokumentasi = (index) => {
@@ -478,6 +477,7 @@ const Upload = () => {
                     type="file"
                     id="dokumentasi"
                     onChange={(e) =>
+                      e.target.files.length &&
                       setDokumentasi([...dokumentasi, e.target.files[0]])
                     }
                   />

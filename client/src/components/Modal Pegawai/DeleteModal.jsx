@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { userRequest } from "../../requestMethods";
 import Loader from "react-js-loader";
 
-const DeleteModal = ({ idPegawai, setModal }) => {
+const DeleteModal = ({ idPegawai, setModal, setRender, render }) => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -12,8 +12,9 @@ const DeleteModal = ({ idPegawai, setModal }) => {
     try {
       await userRequest.delete("users/" + idPegawai);
       setModal({ show: false });
+      setRender(!render);
       navigate("/pegawai", {
-        state: { created: false, removed: true },
+        state: { created: false, removed: true, updated: false },
       });
       setLoading(false);
     } catch (error) {
