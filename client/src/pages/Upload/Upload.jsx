@@ -11,8 +11,15 @@ const Upload = () => {
   const [dokumentasi, setDokumentasi] = useState([]);
   const [internal, setInternal] = useState({
     jumlah: 0,
-    kelompok: [false, false, false, false, false, false],
+    kelompok: [false, false, false, false, false],
   });
+  const [kelompok, setKelompok] = useState([
+    "PSSIP",
+    "PSIE",
+    "PSII",
+    "PDIKI",
+    "PSDIP",
+  ]);
   const [eksternal, setEksternal] = useState({ nama: "", jumlah: 0 });
   const navigate = useNavigate();
   const [laporan, setLaporan] = useState({
@@ -107,7 +114,7 @@ const Upload = () => {
   };
 
   const filterKelompok = () => {
-    return internal.kelompok.map((k, i) => k === true && "Kelompok " + (i + 1));
+    return internal.kelompok.map((k, i) => k === true && kelompok[i]);
   };
 
   const handleDeleteDokumentasi = (index) => {
@@ -253,15 +260,15 @@ const Upload = () => {
                     <input
                       className="sm:w-[10px] sm:h-[10px] w-[8px] h-[8px] border-2 border-[#C4C4C4] rounded-none"
                       type="checkbox"
-                      id={"Kelompok " + (i + 1)}
-                      value={"Kelompok " + (i + 1)}
+                      id={kelompok[i]}
+                      value={kelompok[i]}
                       onChange={() => handleGroupChange(i)}
                     />
                     <label
                       className="font-Poppins sm:text-base text-xs font-medium text-struktur"
-                      htmlFor={"Kelompok " + (i + 1)}
+                      htmlFor={kelompok[i]}
                     >
-                      {"Kelompok " + (i + 1)}
+                      {kelompok[i]}
                     </label>
                   </div>
                 );

@@ -41,8 +41,16 @@ const EditLaporan = () => {
   });
   const [internal, setInternal] = useState({
     jumlah: 0,
-    kelompok: [false, false, false, false, false, false],
+    kelompok: [false, false, false, false, false],
   });
+
+  const [kelompok, setKelompok] = useState([
+    "PSSIP",
+    "PSIE",
+    "PSII",
+    "PDIKI",
+    "PSDIP",
+  ]);
 
   const [documents, setDocuments] = useState({
     undangan: undefined,
@@ -140,9 +148,7 @@ const EditLaporan = () => {
     setInternal({
       ...res.internal[0],
       kelompok: internal.kelompok?.map(
-        (k, i) =>
-          parseInt(res.internal[0]?.kelompok[i]?.split(" ")[1]) === i + 1 &&
-          true
+        (k, i) => !res.internal[0]?.kelompok[i].includes("false") && true
       ),
     });
   };
@@ -171,7 +177,8 @@ const EditLaporan = () => {
     });
   };
 
-  console.log(laporan.dokumentasi);
+  console.log(internal.kelompok);
+  console.log(laporan.internal?.kelompok);
 
   return (
     <form class="detail-box" onSubmit={handleEditLaporan}>
@@ -268,15 +275,15 @@ const EditLaporan = () => {
                       className="sm:w-[10px] sm:h-[10px] w-[8px] h-[8px] border-2 border-[#C4C4C4] rounded-none"
                       type="checkbox"
                       checked={k}
-                      id={"Kelompok " + (i + 1)}
-                      value={"Kelompok " + (i + 1)}
+                      id={kelompok[i]}
+                      value={kelompok[i]}
                       onChange={() => handleGroupChange(i)}
                     />
                     <label
                       className="font-Poppins sm:text-base text-xs font-medium text-struktur"
-                      htmlFor={"Kelompok " + (i + 1)}
+                      htmlFor={kelompok[i]}
                     >
-                      {"Kelompok " + (i + 1)}
+                      {kelompok[i]}
                     </label>
                   </div>
                 );

@@ -32,6 +32,13 @@ const DetailLaporan = () => {
     eksternal: [],
     link: "",
   });
+  const [kelompok, setKelompok] = useState([
+    "PSSIP",
+    "PSIE",
+    "PSII",
+    "PDIKI",
+    "PSDIP",
+  ]);
   const [autoFocus, setAutoFocus] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const idLaporan = location.pathname.split("/")[3];
@@ -186,22 +193,20 @@ const DetailLaporan = () => {
 
                 <div className="flex flex-wrap sm:gap-10 gap-y-1 gap-x-14 items-center sm:mt-3 mt-2  sm:ml-[18px] ml-[15px]">
                   {laporan.internal[0]?.kelompok.length &&
-                    laporan.internal[0].kelompok
-                      .filter((k) => k !== "false")
-                      .map((k, i) => {
-                        return (
-                          <div className="flex gap-2 items-center">
-                            <input
-                              className="sm:w-[10px] sm:h-[10px] w-[8px] h-[8px] border-2 border-[#C4C4C4] rounded-none"
-                              type="checkbox"
-                              checked
-                            />
-                            <label className="font-Poppins sm:text-base text-xs font-medium text-struktur">
-                              {k}
-                            </label>
-                          </div>
-                        );
-                      })}
+                    laporan.internal[0].kelompok.map((k, i) => {
+                      return (
+                        <div className="flex gap-2 items-center">
+                          <input
+                            className="sm:w-[10px] sm:h-[10px] w-[8px] h-[8px] border-2 border-[#C4C4C4] rounded-none"
+                            type="checkbox"
+                            checked={!k.includes("false") && true}
+                          />
+                          <label className="font-Poppins sm:text-base text-xs font-medium text-struktur">
+                            {kelompok[i]}
+                          </label>
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
               <div className="eksternal sm:ml-3">
