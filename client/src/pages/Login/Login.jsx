@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import SitpLogo from "../../assets/svg/sitp.svg";
 import Loader from "react-js-loader";
 import { login } from "../../redux/apiCalls";
+import bgSinergi from "../../assets/img/bg.png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -20,14 +21,18 @@ const Login = () => {
   };
 
   return (
-    <div className="grid items-center justify-center  w-screen h-screen  font-Poppins">
+    <div
+      className="grid items-center justify-center  w-screen h-screen  font-Poppins bg-no-repeat bg-cover"
+      style={{ backgroundImage: `url(${bgSinergi})` }}
+    >
+      <div className="absolute inset-0 bg-[rgba(0,0,0,.4)]"></div>
       <form
-        className="sm:w-[640px] w-screen sm:border border-main-color flex flex-col items-center pt-10 pb-3 sm:shadow-md"
+        className="-translate-y-10 sm:w-[640px] w-screen flex flex-col items-center pt-10 pb-3 sm:shadow-md bg-white bg-opacity-10 rounded-2xl"
         onSubmit={handleSubmit}
       >
         <img src={SitpLogo} alt="Sitp Logo" className="w-24 h-12 mb-7" />
 
-        <h1 className="text-2xl mb-6">Sign In</h1>
+        <h1 className="text-2xl mb-6 text-white font-medium">Sign In</h1>
         <input
           type="email"
           placeholder="Email Adress"
@@ -42,7 +47,7 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <div className="sm:w-1/2 w-[80vw]">
+        <div className="sm:w-1/2 w-[80vw] text-white">
           <input
             type="checkbox"
             id="remember_me"
